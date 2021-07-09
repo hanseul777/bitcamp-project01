@@ -1,0 +1,30 @@
+
+
+plugins {
+    id 'java' // 자바 관련 작업을 수행할 때 사용할 도구 추가
+    id 'eclipse' // 이클립스 관련 작업을 수행할 때 사용할 도구 추가 if 설정안하면 cmd에서 명령 불가
+}
+
+tasks.withType(JavaCompile) {
+    // $javac -encoding UTF-8 ...
+    options.encoding = 'UTF-8';
+}
+
+eclipse {
+    project {
+        name = "bitcamp-project01"
+    }
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+dependencies {
+    // Use JUnit test framework.
+    testImplementation 'junit:junit:4.13.2'
+
+    // This dependency is used by the application.
+    implementation 'com.google.guava:guava:30.1-jre'
+}
