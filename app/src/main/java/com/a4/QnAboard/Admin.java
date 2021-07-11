@@ -18,6 +18,34 @@ public class Admin {
   public static void main(String[] args) {
     Admin ad = new Admin();
     ad.DBbase();
+
+
+
+    try {
+      while(true) {
+
+        System.out.println("1.공지사항");
+        System.out.println("1.QnA게시판");
+        System.out.println("1.스터디게시판");
+        System.out.println("1.자유게시판");
+        System.out.println("5.게시판 종료");
+        int sel = Integer.parseInt(ad.sc.nextLine());
+
+        switch(sel) {
+
+          case 1 :  break;
+          case 2 :  break;
+          case 3 :  break;
+          case 4 :  break;
+          case 5 : 
+            System.out.println("종료합니다.");
+            System.exit(0);
+          default :
+            System.out.println("잘못 입력하셨습니다.");
+            break;
+        }//switch end
+      }//while end
+    }catch (Exception e) { }
   }
 
   public void DBbase() {
@@ -28,5 +56,6 @@ public class Admin {
       ST = CN.createStatement(); 
     }catch(Exception e){System.out.println("error =" + e);}
   }//end
+
 }
 
