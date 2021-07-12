@@ -2,8 +2,18 @@ package com.a4.QnAboard;
 
 public class Member {
 
-  public static void main(String[] args) {
-    // TODO Auto-generated method stub
+  void member () {
+
+    int level = 0;
+
+    switch (level) {
+      case 4:
+      case 3:
+      case 2:
+      case 1:
+      default:
+
+    }
 
   }
 
