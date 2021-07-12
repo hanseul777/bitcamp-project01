@@ -18,6 +18,34 @@ public class Admin {
   public static void main(String[] args) {
     Admin ad = new Admin();
     ad.DBbase();
+
+
+
+    try {
+      while(true) {
+
+        System.out.println("1.공지사항");
+        System.out.println("1.QnA게시판");
+        System.out.println("1.스터디게시판");
+        System.out.println("1.자유게시판");
+        System.out.println("5.게시판 종료");
+        int sel = Integer.parseInt(ad.sc.nextLine());
+
+        switch(sel) {
+
+          case 1 :  break;
+          case 2 :  break;
+          case 3 :  break;
+          case 4 :  break;
+          case 5 : 
+            System.out.println("종료합니다.");
+            System.exit(0);
+          default :
+            System.out.println("잘못 입력하셨습니다.");
+            break;
+        }//switch end
+      }//while end
+    }catch (Exception e) { }
   }
 
   public void DBbase() {
@@ -26,7 +54,13 @@ public class Admin {
       CN = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","system","1234");
       System.out.println("오라클 드라이브및 서버연결성공 ");    
       ST = CN.createStatement(); 
+<<<<<<< HEAD
     } catch(Exception e) {System.out.println("error =" + e);}
   }
+=======
+    }catch(Exception e){System.out.println("error =" + e);}
+  }//end
+
+>>>>>>> 7942204260037a0ab0f9e505a1ab0695cb545a68
 }
 
