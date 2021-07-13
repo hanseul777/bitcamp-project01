@@ -19,6 +19,7 @@ public class Board extends DB{
       boardHandler.insertBoard(input);
       boardHandler.viewBoard(input);
 
+
     } catch(Exception ex) {
       System.out.println("존재하지 않는 게시판입니다.");
     }

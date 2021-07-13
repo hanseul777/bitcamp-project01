@@ -2,7 +2,7 @@ package com.a4.QnAboard;
 
 import java.util.Scanner;
 
-public class App {
+public class App extends MemberHandler{
 
   public static void main(String[] args) {
 
@@ -11,6 +11,8 @@ public class App {
     Scanner keyScan = new Scanner(System.in);
     try {
       while (true) {
+        System.out.println("회원 관리");
+        System.out.println("게시판 관리");
         System.out.print("입력 >>> ");
         int input = Integer.parseInt(keyScan.nextLine());
 
@@ -19,7 +21,11 @@ public class App {
             join.member();
             break;
           case 2:
-            board.board();
+            if(id == null && password == null) {
+              System.out.println("로그인이 필요합니다.");
+            }else {
+              board.board();
+            }
             break;
           case 3:
             System.exit(0);
