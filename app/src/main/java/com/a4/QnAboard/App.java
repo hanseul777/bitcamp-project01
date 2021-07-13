@@ -11,8 +11,8 @@ public class App extends MemberHandler{
     Scanner keyScan = new Scanner(System.in);
     try {
       while (true) {
-        System.out.println("회원 관리");
-        System.out.println("게시판 관리");
+        System.out.println("1. 회원 관리");
+        System.out.println("2. 게시판 관리");
         System.out.print("입력 >>> ");
         int input = Integer.parseInt(keyScan.nextLine());
 

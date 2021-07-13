@@ -7,19 +7,32 @@ public class Board extends DB{
 
   public void board() {
 
+    BoardHandler boardHandler = new BoardHandler();
     DB db = new DB();
     db.DBbase();
+    System.out.print("게시판을 선택하세요 : ");
+    String input = keyScan.nextLine();
 
-    BoardHandler boardHandler = new BoardHandler();
     try {
-      System.out.print("게시판을 선택하세요 : ");
-      String input = keyScan.nextLine();
+      while(true) {
 
-      boardHandler.viewBoard(input);
-      boardHandler.insertBoard(input);
-      boardHandler.viewBoard(input);
+        System.out.println("1.게시판 조회");
+        System.out.println("2.게시글 작성");
+        System.out.println("3.게시글 수정");
+        System.out.println("4.게시글 삭제");
+        System.out.println("5.게시글 검색");
+        System.out.println("6.뒤로 가기");
+        int select  = keyScan.nextInt();
+        switch(select) {
 
-
+          case 1: boardHandler.viewBoard(input); break;
+          case 2:boardHandler.insertBoard(input); break;
+          case 3:boardHandler.updateBoard(input); break;
+          case 4:boardHandler.deleteBoard(input); break;
+          case 5:boardHandler.search(input); break;
+          case 6: break;
+        }
+      }
     } catch(Exception ex) {
       System.out.println("존재하지 않는 게시판입니다.");
     }

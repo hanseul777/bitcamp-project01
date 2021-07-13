@@ -1,15 +1,11 @@
 package com.a4.QnAboard;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Scanner;
 
 public class BoardHandler extends MemberHandler {
   static Scanner sc = new Scanner(System.in);
-
-  void selectModu() { // 멤버 모두
-    System.out.println("게시판 조회");
-    System.out.println();
-  }
 
   public void insertBoard(String table) { // 멤버 모두
     System.out.println("게시글 추가");
@@ -45,26 +41,62 @@ public class BoardHandler extends MemberHandler {
       } else {System.out.println(title + "게시글 등록이 실패하였습니다.");}
     }catch (Exception e) { } 
 
-    viewBoard(table);
   }
 
-  void deleteBoard() { // 작성한 사람, admin
-    System.out.println("게시글 삭제");
-    System.out.println();
+  void updateBoard(String table) { // 작성한 사람
+    //    DBbase();
+    try {
+      //수정처리는 대상필드 name,title
+
+      System.out.print("수정할 게시물 제목 입력  :");
+      String title = sc.nextLine(); 
+      System.out.print("제목 수정내역 입력  :");
+      String updatetitle= sc.nextLine(); 
+      System.out.print("내용 수정내역 입력  :");
+      String contents = sc.nextLine();
+
+      msg = "update " + table + " set title='" + updatetitle +"', contents='"+ contents +"'  where  = '"+ title + "'";
+
+      System.out.println(msg);
+
+
+      int OK = ST.executeUpdate(msg);
+      if (OK>0) {
+        System.out.println( "게시글 수정 성공");
+      }else {
+        System.out.println( "게시글 수정 실패");
+      }
+
+    }catch(Exception ex) { }    
   }
 
-  void updateBoard() { // 작성한 사람
-    System.out.println("게시글 수정");
-    System.out.println();
+  void deleteBoard(String table) { // admin 권한
+    try {
+      System.out.println("\n삭제할 게시글 번호 입력 : ");
+      int a = Integer.parseInt(sc.nextLine());
+
+      msg = "delete from " + table + " where num = " + a ;
+      System.out.println(msg);
+      int aa = ST.executeUpdate(msg);
+
+      if (aa>0) {
+        System.out.println(a + "게시글 삭제");
+      } else {System.out.println(a + "게시글 삭제실패했습니다.");}
+
+    }catch (Exception e) {System.out.println("에러이유" + e);}
   }
 
-  void deleteMem() { // admin 권한
-    System.out.println("회원 삭제");
-    System.out.println();
-  }
-
-  void search() { // 회원 모두
-    System.out.println("검색");
+  void search(String table) throws SQLException { // 회원 모두
+    //    select * from sosi where  where name like '%a%'  ; 한글자라도 포함되면 조회
+    System.out.println("게시글 검색 키워드: ");
+    String a = sc.nextLine();
+    String msg = "select * from " + table + " where contents like '%" + a + "%'" ;
+    RS = ST.executeQuery(msg);
+    while(RS.next()==true) {
+      String contents = RS.getString("contents");
+      String title = RS.getString("title");
+      System.out.println(title +"\t" + contents);
+    }
   }
 
   public void viewBoard(String table) { //회원모두, 게시글 보기
@@ -91,6 +123,15 @@ public class BoardHandler extends MemberHandler {
         //System.out.printf(id + "\t" + grade +  "\t" + name+ "\t" + email+ "\t" + mobile+ "\t" + date+ "\t" + recommended+ "\t" + belongs);
         System.out.printf("%10s %10s %10s %20s %20s %15s %4s %3s%n"
             , num, title, contents, reply, recommended, date, id, viewCount);
+      }
+      //게시글 번호로 내용 출력
+      System.out.println("게시글 번호 입력: ");
+      String a = sc.nextLine();
+      String msg = "select contents from " + table + " where num= '" + a + "'" ;
+      RS = ST.executeQuery(msg);
+      while(RS.next()==true) {
+        String contents = RS.getString("contents");
+        System.out.println(contents);
       }
 
     } catch (Exception e) {
