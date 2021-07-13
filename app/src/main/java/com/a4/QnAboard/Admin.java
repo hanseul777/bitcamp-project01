@@ -54,6 +54,7 @@ public class Admin {
       CN = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","system","1234");
       System.out.println("오라클 드라이브및 서버연결성공 ");    
       ST = CN.createStatement(); 
+<<<<<<< HEAD
 
     } catch(Exception e) {
       System.out.println("error =" + e);
@@ -63,4 +64,10 @@ public class Admin {
 
   }
 }
+=======
+    } catch(Exception e) {System.out.println("error =" + e);}
+  }
+}//end
+
+>>>>>>> 814c349f7f88ffba72cda52e6b946f3300e23b15
 
