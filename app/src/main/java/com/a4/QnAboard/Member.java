@@ -1,20 +1,18 @@
-package com.a4.QnAboard;
+package com.joung.project;
+
+import com.joung.pratice.DB;
 
 public class Member {
 
-  void member () {
+  public void member() {
+    DB fb = new DB();
+    Id id = new Id();
 
-    int level = 0;
 
-    switch (level) {
-      case 4:
-      case 3:
-      case 2:
-      case 1:
-      default:
+    fb.DBbase();
 
-    }
+    id.memberJoin();
 
-  }
+  }  
 
 }
