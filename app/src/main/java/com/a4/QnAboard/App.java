@@ -1,4 +1,4 @@
-package com.joung.project;
+package com.a4.QnAboard;
 
 public class App {
 

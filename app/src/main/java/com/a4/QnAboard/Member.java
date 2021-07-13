@@ -1,6 +1,4 @@
-package com.joung.project;
-
-import com.joung.pratice.DB;
+package com.a4.QnAboard;
 
 public class Member {
 

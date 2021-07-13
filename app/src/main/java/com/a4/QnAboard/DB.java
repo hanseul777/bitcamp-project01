@@ -1,4 +1,4 @@
-package com.joung.project;
+package com.a4.QnAboard;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
