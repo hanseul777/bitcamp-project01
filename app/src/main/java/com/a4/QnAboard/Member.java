@@ -3,11 +3,12 @@ package com.a4.QnAboard;
 public class Member {
 
   public void member() {
-    DB fb = new DB();
+
+    DB db = new DB();
     Id id = new Id();
 
 
-    fb.DBbase();
+    db.DBbase();
 
     id.memberJoin();
 

@@ -12,9 +12,11 @@ public class DB {
   Statement ST = null;  //ST=CN.createStatement()명령어생성 삭제,신규등록,조회하라
   ResultSet RS = null;  //select조회결과값 전체데이터를 기억합니다
   PreparedStatement PST = null; //좀 더 용이하게 자바변수 sql문에 넣는 방법, 미리 컴파일 되있음
+
   String msg = "";  
 
   public void DBbase() {
+
     try {
       Class.forName("oracle.jdbc.driver.OracleDriver"); 
       CN = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","system","1234");
