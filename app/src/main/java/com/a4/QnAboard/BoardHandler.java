@@ -1,6 +1,5 @@
 package com.a4.QnAboard;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -86,17 +85,19 @@ public class BoardHandler extends MemberHandler {
     }catch (Exception e) {System.out.println("에러이유" + e);}
   }
 
-  void search(String table) throws SQLException { // 회원 모두
-    //    select * from sosi where  where name like '%a%'  ; 한글자라도 포함되면 조회
-    System.out.println("게시글 검색 키워드: ");
-    String a = sc.nextLine();
-    String msg = "select * from " + table + " where contents like '%" + a + "%'" ;
-    RS = ST.executeQuery(msg);
-    while(RS.next()==true) {
-      String contents = RS.getString("contents");
-      String title = RS.getString("title");
-      System.out.println(title +"\t" + contents);
-    }
+  void search(String table)  { // 회원 모두
+
+    try {
+      System.out.println("게시글 검색 키워드: ");
+      String a = sc.nextLine();
+      String msg = "select title,contents from " + table + " where title like '%" + a + "%' or contents like '%" + a + "%'" ;
+      RS = ST.executeQuery(msg);
+      while(RS.next()==true) {
+        String contents = RS.getString("contents");
+        String title = RS.getString("title");
+        System.out.println(title +"\t" + contents);
+      }
+    }catch(Exception e) { }
   }
 
   public void viewBoard(String table) { //회원모두, 게시글 보기
@@ -125,14 +126,14 @@ public class BoardHandler extends MemberHandler {
             , num, title, contents, reply, recommended, date, id, viewCount);
       }
       //게시글 번호로 내용 출력
-      System.out.println("게시글 번호 입력: ");
-      String a = sc.nextLine();
-      String msg = "select contents from " + table + " where num= '" + a + "'" ;
-      RS = ST.executeQuery(msg);
-      while(RS.next()==true) {
-        String contents = RS.getString("contents");
-        System.out.println(contents);
-      }
+      //      System.out.println("게시글 번호 입력: ");
+      //      String a = sc.nextLine();
+      //      String msg = "select contents from " + table + " where num= '" + a + "'" ;
+      //      RS = ST.executeQuery(msg);
+      //      while(RS.next()==true) {
+      //        String contents = RS.getString("contents");
+      //        System.out.println(contents);
+      //      }
 
     } catch (Exception e) {
       System.out.println("에러이유" + e);

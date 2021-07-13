@@ -12,7 +12,7 @@ public class Board extends DB{
     db.DBbase();
     System.out.print("게시판을 선택하세요 : ");
     String input = keyScan.nextLine();
-
+    boardHandler.viewBoard(input);
     try {
       while(true) {
 
