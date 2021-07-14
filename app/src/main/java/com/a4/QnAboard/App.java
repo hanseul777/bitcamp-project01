@@ -24,7 +24,7 @@ public class App extends MemberHandler{
           case 2:
             if(id == null && password == null) {
               System.out.println("로그인이 필요합니다.");
-            }else {
+            } else {
               board.board();
             }
             break;
