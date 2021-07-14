@@ -10,13 +10,25 @@ public class Board extends DB{
     BoardHandler boardHandler = new BoardHandler();
     DB db = new DB();
     db.DBbase();
+    System.out.println("[게시판 목록] : Review/ FreeBoard/ Appointment/ Board");
+    System.out.println("-----------[자유게시판]------------------");
+    boardHandler.boardBoard("freeboard");
+    System.out.println("-----------------------------------------------------------------------------------------");
+    System.out.println("-----------[질문답변게시판]--------------");
+    boardHandler.boardBoard("board");
+    System.out.println("-----------------------------------------------------------------------------------------");
+    System.out.println("-----------[수업진도게시판]--------------");
+    boardHandler.boardBoard("review");
+    System.out.println("-----------------------------------------------------------------------------------------");
+    System.out.println();
+    System.out.println("-----------------------------------------------------------------------------------------");
     System.out.print("게시판을 선택하세요 : ");
     String input = keyScan.nextLine();
     boardHandler.viewBoard(input);
     try {
-      while(true) {
+      loop: while(true) {
 
-        System.out.println("1.게시판 조회");
+        System.out.println("\n1.게시판 조회");
         System.out.println("2.게시글 작성");
         System.out.println("3.게시글 수정");
         System.out.println("4.게시글 삭제");
@@ -25,12 +37,12 @@ public class Board extends DB{
         int select  = keyScan.nextInt();
         switch(select) {
 
-          case 1: boardHandler.viewBoard(input); break;
+          case 1: boardHandler.viewBoard2(input); break;
           case 2:boardHandler.insertBoard(input); break;
           case 3:boardHandler.updateBoard(input); break;
           case 4:boardHandler.deleteBoard(input); break;
           case 5:boardHandler.search(input); break;
-          case 6: break;
+          case 6: break loop;
         }
       }
     } catch(Exception ex) {
