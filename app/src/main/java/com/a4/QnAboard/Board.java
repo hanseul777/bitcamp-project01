@@ -10,12 +10,13 @@ public class Board extends DB{
     BoardHandler boardHandler = new BoardHandler();
     DB db = new DB();
     db.DBbase();
-    System.out.print("게시판을 선택하세요 : ");
+
+    System.out.println("게시판 목록 : Review Board Freeboard Appointment");
+    System.out.print("게시판을 선택하세요(ex : Review) : ");
     String input = keyScan.nextLine();
     boardHandler.viewBoard(input);
     try {
-      while(true) {
-
+      loop: while (true) {
         System.out.println("1.게시판 조회");
         System.out.println("2.게시글 작성");
         System.out.println("3.게시글 수정");
@@ -23,14 +24,14 @@ public class Board extends DB{
         System.out.println("5.게시글 검색");
         System.out.println("6.뒤로 가기");
         int select  = keyScan.nextInt();
-        switch(select) {
 
+        switch (select) {
           case 1: boardHandler.viewBoard(input); break;
           case 2:boardHandler.insertBoard(input); break;
           case 3:boardHandler.updateBoard(input); break;
           case 4:boardHandler.deleteBoard(input); break;
           case 5:boardHandler.search(input); break;
-          case 6: break;
+          case 6: break loop;
         }
       }
     } catch(Exception ex) {
