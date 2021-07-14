@@ -34,6 +34,7 @@ public class Appointment extends MemberHandler{ // 스터디 약속
     } catch(Exception ex) {
       System.out.println("잘못 입력입니다.");
     }
+    System.out.println();
   }
 
   public void insertAppointment() {
@@ -47,7 +48,7 @@ public class Appointment extends MemberHandler{ // 스터디 약속
       String location = sc.nextLine();
       System.out.print("시간 : ");
       String time = sc.nextLine();
-      System.out.println("정원 : ");
+      System.out.print("정원 : ");
       int numLimit = Integer.parseInt(sc.nextLine());
       msg = "insert into appointment(num, title, location, time, written, id, numlimit, viewcount) "
           + "values(seq.nextval, ?, ?, ?, sysdate, '" + id  + "',? ,0)";
@@ -66,6 +67,7 @@ public class Appointment extends MemberHandler{ // 스터디 약속
     } catch (Exception e) {
       System.out.println("잘못된 입력입니다.");
     }
+    System.out.println();
   }
 
 
