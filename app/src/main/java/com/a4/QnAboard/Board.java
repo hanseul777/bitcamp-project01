@@ -32,6 +32,8 @@ public class Board extends DB{
 
     try {
       if (input.equals("a")) {
+        input = "appointment";
+
         appointment.viewAppointment();
         loop: while (true) {
           System.out.println("1.게시판 조회");
@@ -54,24 +56,28 @@ public class Board extends DB{
           }
         }
       } else {
-        boardHandler.viewBoard(input);
-        loop: while (true) {
-          System.out.println("1.게시판 조회");
-          System.out.println("2.게시글 작성");
-          System.out.println("3.게시글 수정");
-          System.out.println("4.게시글 삭제");
-          System.out.println("5.게시글 검색");
-          System.out.println("6.뒤로 가기");
-          System.out.print("입력 : ");
-          int select  = keyScan.nextInt();
+        if (input.equals("f")) {
+          input = "freeBoard";
 
-          switch (select) {
-            case 1: boardHandler.viewReply(input); break;
-            case 2: boardHandler.insertBoard(input); break;
-            case 3: boardHandler.updateBoard(input); break;
-            case 4: boardHandler.deleteBoard(input); break;
-            case 5: boardHandler.search(input); break;
-            case 6: break loop;
+          boardHandler.viewBoard(input);
+          loop: while (true) {
+            System.out.println("1.게시판 조회");
+            System.out.println("2.게시글 작성");
+            System.out.println("3.게시글 수정");
+            System.out.println("4.게시글 삭제");
+            System.out.println("5.게시글 검색");
+            System.out.println("6.뒤로 가기");
+            System.out.print("입력 : ");
+            int select  = keyScan.nextInt();
+
+            switch (select) {
+              case 1: boardHandler.viewReply(input); break;
+              case 2: boardHandler.insertBoard(input); break;
+              case 3: boardHandler.updateBoard(input); break;
+              case 4: boardHandler.deleteBoard(input); break;
+              case 5: boardHandler.search(input); break;
+              case 6: break loop;
+            }
           }
         }
       }

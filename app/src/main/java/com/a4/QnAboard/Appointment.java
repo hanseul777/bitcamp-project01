@@ -111,10 +111,8 @@ public class Appointment extends MemberHandler{ // 스터디 약속
     DBbase();
     try {
       //수정처리는 대상필드 name,title
-      System.out.print("수정할 게시물 번호 입력  :");
-      int num = Integer.parseInt(sc.nextLine());
 
-      System.out.print("제목 수정내역 입력  :");
+      System.out.print("수정할 게시글 제목 입력 :");
       String updatetitle= sc.nextLine(); 
       System.out.print("장소 수정내역 입력  :");
       String location = sc.nextLine();
@@ -124,18 +122,15 @@ public class Appointment extends MemberHandler{ // 스터디 약속
       int numlimit = Integer.parseInt(sc.nextLine());
 
 
-      msg = "update appointment set title =?, location= ?, time = ?, numlimit =? where num = ?" ;
+      msg = "update appointment set location= ?, time = ?, numlimit =? where title = ?" ;
       System.out.println(msg);
       PST = CN.prepareStatement(msg);
-      PST.setString(1, updatetitle);
-      PST.setString(2, location);
-      PST.setString(3, time);
-      PST.setInt(4, numlimit);
-      PST.setInt(5, num);
+      PST.setString(1, location);
+      PST.setString(2, time);
+      PST.setInt(3, numlimit);
+      PST.setString(4, updatetitle);
 
-
-
-      int OK = ST.executeUpdate(msg);
+      int OK = PST.executeUpdate();
       if (OK>0) {
         System.out.println( "게시글 수정 성공");
       }else {

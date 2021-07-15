@@ -25,7 +25,7 @@ public class BoardHandler extends MemberHandler {
 
 
       msg = "insert into " + table + " (num, title, contents, reply, recommended, join_date, id, viewcount)"
-          + " values(seq.nextval, ?, ?, ?, 0, sysdate,'" + id + "', 0)";
+          + " values(f.nextval, ?, ?, ?, 0, sysdate,'" + id + "', 0)";
       PST = CN.prepareStatement(msg);
       PST.setString(1, title);
       PST.setString(2, contents);
