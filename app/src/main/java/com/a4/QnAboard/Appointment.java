@@ -8,7 +8,7 @@ public class Appointment extends MemberHandler{ // 스터디 약속
 
   public void viewAppointment() {
     DBbase();
-    try {
+    try { 
       msg = "select * from appointment";
 
       RS = ST.executeQuery(msg);

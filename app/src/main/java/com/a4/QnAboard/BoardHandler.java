@@ -184,4 +184,37 @@ public class BoardHandler extends MemberHandler {
       }
     }catch(Exception e) { }
   } 
+
+  public void admin() {
+    DBbase();
+    MemberHandler memberHandler = new MemberHandler();
+    try {
+      if (id.equals("admin")) {
+        memberHandler.selectAll();
+        System.out.print("권한을 주고 싶은 ID 입력 : ");
+        String changeId = sc.nextLine();
+        System.out.print("부여할 권한 범위 입력 (범위:1...3) : ");
+        String changeGrade = sc.nextLine();
+
+        String updateMsg = "update id set grade = ? where id = ?";
+        System.out.println(updateMsg);
+        PST = CN.prepareStatement(updateMsg);
+        PST.setString(1, changeId);
+        PST.setString(2, changeGrade);
+
+        int change = PST.executeUpdate();
+        if (change > 0) {
+          System.out.println("권한 부여 완료");
+        } else {
+          System.out.println("권한 부여 실패");
+        }
+      } else {
+        System.out.println("관리자만이 접근할 수 있습니다.");
+      }
+    } catch(Exception ex) {
+      System.out.println("잘못된 접근입니다.");
+    }
+    System.out.println();
+  }
+
 }

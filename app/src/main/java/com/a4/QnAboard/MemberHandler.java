@@ -67,13 +67,13 @@ public class MemberHandler extends DB {
 
           switch (grade) {
             case 4:
-              System.out.println(grade + "번 등급 기능 : 삭제가능");
+              System.out.println(grade + "게시글 삭제가능");
             case 3:
-              System.out.println(grade + "번 등급 기능 : 수정가능");
+              System.out.println(grade + "게시글 수정가능");
             case 2:
-              System.out.println(grade + "번 등급 기능 : 생성가능");
+              System.out.println(grade + "게시글 추가가능");
             case 1:
-              System.out.println(grade + "번 등급 기능 : 조회가능");
+              System.out.println(grade + "게시글 조회가능");
             default:
               break;
           }
@@ -82,6 +82,7 @@ public class MemberHandler extends DB {
         System.out.println("비밀번호가 맞지 않습니다.");
       }
     }
+    System.out.println();
   }
 
   public void insertMember() {
@@ -123,6 +124,7 @@ public class MemberHandler extends DB {
         System.out.println(id + "회원가입 성공했습니다.");
       } else {System.out.println(id + "회원가입 실패했습니다.");}
     }catch (Exception e) { } 
+    System.out.println();
   }
 
   public void deleteMember() {
@@ -153,6 +155,7 @@ public class MemberHandler extends DB {
     } catch (Exception e) {
       System.out.println("에러이유" + e);
     }
+    System.out.println();
   }//delete end
 
   //  void Logout() throws SQLException {
@@ -183,7 +186,9 @@ public class MemberHandler extends DB {
     }else {
       System.out.println("로그아웃 취소되었습니다.");
     }
+    System.out.println();
   }
+
 
 
 }
