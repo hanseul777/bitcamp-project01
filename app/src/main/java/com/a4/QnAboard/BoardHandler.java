@@ -99,7 +99,7 @@ public class BoardHandler extends MemberHandler {
     }catch(Exception e) { }
   }
 
-  public void viewBoard2(String table) { //회원모두, 게시글 보기
+  public void viewReply(String table) { //회원모두, 게시글 보기
     DBbase();
     try {
       msg = "select * from " + table;
@@ -129,7 +129,7 @@ public class BoardHandler extends MemberHandler {
       String a = sc.nextLine();
       String msg = "select contents,reply from " + table + " where num= '" + a + "'" ;
       RS = ST.executeQuery(msg);
-      while(RS.next()==true) {
+      while(RS.next() == true) {
         String contents = RS.getString("contents");
 
         System.out.println("------------------------------제목------------------------------");
@@ -138,10 +138,17 @@ public class BoardHandler extends MemberHandler {
 
         System.out.println("------------------------------댓글------------------------------");
         System.out.println();
+<<<<<<< HEAD
         //        for(int i =0; i < 5; i++) {
         //          String reply = RS.getString("reply");
         //          System.out.println(reply);
         //        }
+=======
+        for(int i = 0; i < 5; i++) {
+          String reply = RS.getString("reply");
+          System.out.println(reply);
+        }
+>>>>>>> 0bb0029743c914e1d944feac083ee7bdae15fe63
 
         System.out.println("댓글 보기 [y / N]");
         if(sc.nextLine().equals("y")) {
@@ -158,34 +165,8 @@ public class BoardHandler extends MemberHandler {
     }    
     System.out.println();
   }
+
   public void viewBoard (String table) {
-    DBbase();
-    try {
-      msg = "select * from " + table;
-
-      RS = ST.executeQuery(msg);
-      //      System.out.println(msg);
-
-      // 자바의 정석 39p 참고
-      System.out.printf("%10s %10s %10s %20s %15s %4s %3s%n"
-          , "번호", "제목", "내용","좋아요","날짜","ID","조회수");
-      System.out.println();
-      for(int i =0; i < 10 && RS.next() == true; i++) {
-        int num = RS.getInt("num");
-        String title = RS.getString("title");
-        String contents = RS.getString("contents");
-        //        String reply = RS.getString("reply");
-        int recommended = RS.getInt("recommended");
-        Date date  = RS.getDate("written");
-        String id = RS.getString("id");
-        int viewCount = RS.getInt("viewcount");
-        //System.out.printf(id + "\t" + grade +  "\t" + name+ "\t" + email+ "\t" + mobile+ "\t" + date+ "\t" + recommended+ "\t" + belongs);
-        System.out.printf("%10d %10s %10s %20d %15s %4s %3d%n"
-            , num, title, contents, recommended, date, id, viewCount);
-      }
-    }catch(Exception e) { }
-  }
-  public void boardBoard (String table) {
     DBbase();
     try {
       msg = "select * from " + table;
