@@ -98,6 +98,7 @@ public class BoardHandler extends MemberHandler {
 
   public void viewReply(String table) { //회원모두, 게시글 보기
     DBbase();
+    Appointment appointment = new Appointment();
     try {
       msg = "select * from " + table;
 
@@ -136,19 +137,34 @@ public class BoardHandler extends MemberHandler {
         System.out.println("------------------------------댓글------------------------------");
         System.out.println();
 
-        //        for(int i =0; i < 5; i++) {
-        //          String reply = RS.getString("reply");
-        //          System.out.println(reply);
-        //        }
+        loop: while (true) {
+          String command = sc.nextLine();
 
-        System.out.println("댓글 보기 [y / N]");
-        if(sc.nextLine().equals("y")) {
-          String reply = RS.getString("reply");
-          System.out.println("------------------------------댓글------------------------------");
-          System.out.println();
-          System.out.println(reply);
-
+          switch (command) {
+            case "1" :
+              System.out.println("[1] 댓글보기");
+              String reply = RS.getString("contents");
+              System.out.println("------------------------------댓글------------------------------");
+              System.out.println();
+              System.out.println(reply);
+              break;
+            case "2" :
+              System.out.println("[2] 댓글쓰기");
+              appointment.reply();
+              break;
+            case "3" :
+              System.out.println("[3] 나가기");
+              break loop;
+          }
         }
+        //        System.out.println("댓글 보기 [y / N]");
+        //        if(sc.nextLine().equals("y")) {
+        //          String reply = RS.getString("reply");
+        //          System.out.println("------------------------------댓글------------------------------");
+        //          System.out.println();
+        //          System.out.println(reply);
+        //
+        //        }
       }
 
     } catch (Exception e) {
