@@ -28,7 +28,7 @@ public class MemberHandler extends DB {
         String name = RS.getString("name");
         String email = RS.getString("email");
         String mobile = RS.getString("mobile");
-        Date date  = RS.getDate("written");
+        Date date  = RS.getDate("join_date");
         int recommended = RS.getInt("recommended");
         String belongs = RS.getString("belongs");
         //System.out.printf(id + "\t" + grade +  "\t" + name+ "\t" + email+ "\t" + mobile+ "\t" + date+ "\t" + recommended+ "\t" + belongs);
@@ -106,7 +106,7 @@ public class MemberHandler extends DB {
       System.out.print("소속입력 : ");
       String belongs = sc.nextLine();
 
-      msg = "insert into id(id,pwd,name,email,mobile,written,belongs)"
+      msg = "insert into id(id,pwd,name,email,mobile,join_date,belongs)"
           + "values(?, ?, ?, ?, ?, sysdate, ?)";
       PST = CN.prepareStatement(msg);
       PST.setString(1, id);

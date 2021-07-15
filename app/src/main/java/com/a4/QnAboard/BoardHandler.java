@@ -24,7 +24,7 @@ public class BoardHandler extends MemberHandler {
       String reply = sc.nextLine();
 
 
-      msg = "insert into " + table + " (num, title, contents, reply, recommended, written, id, viewcount)"
+      msg = "insert into " + table + " (num, title, contents, reply, recommended, join_date, id, viewcount)"
           + " values(seq.nextval, ?, ?, ?, 0, sysdate,'" + id + "', 0)";
       PST = CN.prepareStatement(msg);
       PST.setString(1, title);
@@ -117,7 +117,7 @@ public class BoardHandler extends MemberHandler {
         String contents = RS.getString("contents");
         //        String reply = RS.getString("reply");
         int recommended = RS.getInt("recommended");
-        Date date  = RS.getDate("written");
+        Date date  = RS.getDate("join_date");
         String id = RS.getString("id");
         int viewCount = RS.getInt("viewcount");
         //System.out.printf(id + "\t" + grade +  "\t" + name+ "\t" + email+ "\t" + mobile+ "\t" + date+ "\t" + recommended+ "\t" + belongs);
@@ -183,7 +183,7 @@ public class BoardHandler extends MemberHandler {
         String contents = RS.getString("contents");
         //        String reply = RS.getString("reply");
         int recommended = RS.getInt("recommended");
-        Date date  = RS.getDate("written");
+        Date date  = RS.getDate("join_date");
         String id = RS.getString("id");
         int viewCount = RS.getInt("viewcount");
         //System.out.printf(id + "\t" + grade +  "\t" + name+ "\t" + email+ "\t" + mobile+ "\t" + date+ "\t" + recommended+ "\t" + belongs);
