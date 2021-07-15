@@ -106,8 +106,8 @@ public class MemberHandler extends DB {
       System.out.print("소속입력 : ");
       String belongs = sc.nextLine();
 
-      msg = "insert into id(id,grade,pwd,name,email,mobile,written,belongs)"
-          + "values(?, 1, ?, ?, ?, ?, sysdate, ?)";
+      msg = "insert into id(id,pwd,name,email,mobile,written,belongs)"
+          + "values(?, ?, ?, ?, ?, sysdate, ?)";
       PST = CN.prepareStatement(msg);
       PST.setString(1, id);
       PST.setString(2, password);
