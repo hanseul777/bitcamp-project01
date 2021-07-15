@@ -19,7 +19,7 @@ public class DB {
 
     try {
       Class.forName("oracle.jdbc.driver.OracleDriver"); 
-      CN = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","system","1234");
+      CN = DriverManager.getConnection("jdbc:oracle:thin:@61.72.146.172:8810:xe","system","oracle");
       ST = CN.createStatement(); 
     } catch(Exception e) {
       System.out.println("error =" + e);

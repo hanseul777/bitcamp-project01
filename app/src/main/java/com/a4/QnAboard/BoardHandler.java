@@ -138,17 +138,16 @@ public class BoardHandler extends MemberHandler {
 
         System.out.println("------------------------------댓글------------------------------");
         System.out.println();
-<<<<<<< HEAD
+
         //        for(int i =0; i < 5; i++) {
         //          String reply = RS.getString("reply");
         //          System.out.println(reply);
         //        }
-=======
+
         for(int i = 0; i < 5; i++) {
           String reply = RS.getString("reply");
           System.out.println(reply);
         }
->>>>>>> 0bb0029743c914e1d944feac083ee7bdae15fe63
 
         System.out.println("댓글 보기 [y / N]");
         if(sc.nextLine().equals("y")) {

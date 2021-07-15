@@ -45,15 +45,11 @@ public class Board extends DB{
           switch (select) {
             case 1: appointment.viewAppointment(); break;
             case 2: appointment.insertAppointment(); break;
-<<<<<<< HEAD
             case 3: appointment.updateBoard(); break;
             case 4: appointment.deleteBoard(); break;
             //case 5: boardHandler.search(input); break;
-=======
             //case 3: boardHandler.updateBoard(); break;
-            case 4: appointment.deleteBoard(); break;
             //case 5: boardHandler.search(); break;
->>>>>>> 0bb0029743c914e1d944feac083ee7bdae15fe63
             case 6: break loop;
           }
         }
