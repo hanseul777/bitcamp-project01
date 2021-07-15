@@ -1,6 +1,5 @@
 package com.a4.QnAboard;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class App extends MemberHandler{
@@ -14,6 +13,7 @@ public class App extends MemberHandler{
     Board board = new Board();
 
     main.mainScreen();
+
     while (true) {
       Scanner keyScan = new Scanner(System.in);
       main.bottom();
@@ -22,13 +22,8 @@ public class App extends MemberHandler{
         case 1 : memberManagement.insertMember(); break;
         case 2 : memberManagement.login(); break;
         case 3 : memberManagement.deleteMember(); break;
-        case 4 : try {
-          memberManagement.Logout();
-        } catch (SQLException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        } break;
-        case 5 : board.board();
+        case 4 : memberManagement.Logout(); break;
+        case 5 : board.board(); break;
         case 9 :
           System.out.println("메인화면으로 이동합니다."); break; 
         default : System.out.println("잘못 입력하셨습니다.");

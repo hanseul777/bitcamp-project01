@@ -1,6 +1,5 @@
 package com.a4.QnAboard;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -59,7 +58,7 @@ public class MemberHandler extends DB {
         // 값이 일치하는 경우 : 1
         // 값이 일치하지 않는 경우 : 0
         if (cnt > 0) { // id,pw 일치하는경우
-          String grd = "select grade from id where id = '" + id + "'" ;//입력값 id가 포함된 쿼리문을 변수grd에 입력
+          String grd = "select grade from id where id = '" + id + "'";//입력값 id가 포함된 쿼리문을 변수grd에 입력
           RS = ST.executeQuery(grd);
           //변수 grd를 데이터베이스 변수 RS에 입력한다.
           while(RS.next() == true) {
@@ -68,13 +67,13 @@ public class MemberHandler extends DB {
 
             switch (grade) {
               case 4:
-                System.out.println("게시글 삭제가능");
+                System.out.print("게시글 삭제가능 ");
               case 3:
-                System.out.println("게시글 수정가능");
+                System.out.print("게시글 수정가능 ");
               case 2:
-                System.out.println("게시글 추가가능");
+                System.out.print("게시글 추가가능 ");
               case 1:
-                System.out.println("게시글 조회가능");
+                System.out.println("게시글 조회가능 ");
               default:
                 break;
             }
@@ -175,22 +174,23 @@ public class MemberHandler extends DB {
   // }
   //}
 
-  public void Logout() throws SQLException {
-    System.out.println("정말로 로그아웃 하시겠습니까 ? [ y/ N ]");
-    if(sc.nextLine().equals("y")) {
-      if(id == null && password == null) {
-        System.out.println("로그인 되어있지 않습니다.");
-      }else { 
-        id = null;
-        password = null;
-        System.out.println("로그아웃되었습니다.");
+  public void Logout() {
+    try {
+      System.out.println("정말로 로그아웃 하시겠습니까 ? [ y/ N ]");
+      if(sc.nextLine().equals("y")) {
+        if(id == null && password == null) {
+          System.out.println("로그인 되어있지 않습니다.");
+        }else { 
+          id = null;
+          password = null;
+          System.out.println("로그아웃되었습니다.");
+        }
+      }else {
+        System.out.println("로그아웃 취소되었습니다.");
       }
-    }else {
-      System.out.println("로그아웃 취소되었습니다.");
-    }
-    System.out.println();
+      System.out.println();
+    } catch(Exception e) { }
+
   }
-
-
 
 }

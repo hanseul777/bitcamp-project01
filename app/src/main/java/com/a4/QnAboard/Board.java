@@ -2,7 +2,7 @@ package com.a4.QnAboard;
 
 import java.util.Scanner;
 
-public class Board extends DB{
+public class Board extends MemberHandler{
   static Scanner keyScan = new Scanner(System.in);
 
   public void board() {
@@ -24,17 +24,17 @@ public class Board extends DB{
     appointment.viewAppointment();
     System.out.println("-----------------------------------------------------------------------------------------");
     System.out.println();
-
     System.out.println("[게시판 목록] : freeBoard/ board/ review/ appointment");
     System.out.println("[단축어] : [f]-freeBoard [b]-board [r]-review [a]-appointment");
+    System.out.println();
     System.out.print("입장할 게시판을 입력해주세요 : ");
     String input = keyScan.nextLine();
 
     try {
       if (input.equals("a")) {
         input = "appointment";
-
         appointment.viewAppointment();
+
         loop: while (true) {
           System.out.println("1.게시판 조회");
           System.out.println("2.게시글 작성");
@@ -74,31 +74,48 @@ public class Board extends DB{
 
   public void boardList(String input) {
 
-    Appointment appointment = new Appointment();
     BoardHandler boardHandler = new BoardHandler();
-    DB db = new DB();
-    db.DBbase();
+    DBbase();
 
     boardHandler.viewBoard(input);
-    loop: while (true) {
-      System.out.println("1.게시판 조회");
-      System.out.println("2.게시글 작성");
-      System.out.println("3.게시글 수정");
-      System.out.println("4.게시글 삭제");
-      System.out.println("5.게시글 검색");
-      System.out.println("6.뒤로 가기");
-      System.out.print("입력 : ");
-      int select  = keyScan.nextInt();
+    try {
+      loop: while (true) {
+        String grd = "select grade from id where id = '" + id + "'";//입력값 id가 포함된 쿼리문을 변수grd에 입력
+        RS = ST.executeQuery(grd);
 
-      switch (select) {
-        case 1: boardHandler.viewReply(input); break;
-        case 2: boardHandler.insertBoard(input); break;
-        case 3: boardHandler.updateBoard(input); break;
-        case 4: boardHandler.deleteBoard(input); break;
-        case 5: boardHandler.search(input); break;
-        case 6: break loop;
+        //변수 grd를 데이터베이스 변수 RS에 입력한다.
+        while(RS.next() == true) {
+          int grade = RS.getInt("grade");// id필드 데이터에에 종속되어 있는 grade필드 데이터를 int변수로 저장
+          System.out.println(id + "님의 회원 등급은 " + grade + "번 입니다.");
+
+          switch (grade) {
+            case 4:
+              System.out.print("[d] 게시글 삭제 ");
+              System.out.print("[s] 게시글 검색 ");
+            case 3:
+              System.out.print("[u] 게시글 수정 ");
+            case 2:
+              System.out.print("[i] 게시글 작성 ");
+            case 1:
+              System.out.print("[v] 게시판 조회 ");
+              System.out.print("[b] 뒤로 가기");
+            default:
+              break;
+          }
+          System.out.print("입력 : ");
+          String select  = keyScan.nextLine();
+          switch (select) {
+            case "d": boardHandler.deleteBoard(input); break;
+            case "s": boardHandler.search(input); break;
+            case "u": boardHandler.updateBoard(input); break;
+            case "i": boardHandler.insertBoard(input); break;
+            case "v": boardHandler.viewReply(input); break;
+            case "b": break loop;
+          }
+        }
+
       }
-    }
+    } catch(Exception e) { System.out.println(e);}
   }
 }
 /*
