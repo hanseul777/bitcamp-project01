@@ -199,8 +199,8 @@ public class BoardHandler extends MemberHandler {
         String updateMsg = "update id set grade = ? where id = ?";
         System.out.println(updateMsg);
         PST = CN.prepareStatement(updateMsg);
-        PST.setString(1, changeId);
-        PST.setString(2, changeGrade);
+        PST.setString(1, changeGrade);
+        PST.setString(2, changeId);
 
         int change = PST.executeUpdate();
         if (change > 0) {
