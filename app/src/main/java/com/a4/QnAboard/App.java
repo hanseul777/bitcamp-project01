@@ -18,6 +18,7 @@ public class App extends MemberHandler{
       Scanner keyScan = new Scanner(System.in);
       main.bottom();
       int input = Integer.parseInt(keyScan.nextLine());
+      System.out.println();
       switch(input) {
         case 1 : memberManagement.insertMember(); break;
         case 2 : memberManagement.login(); break;

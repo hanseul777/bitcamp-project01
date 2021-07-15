@@ -64,7 +64,7 @@ public class MemberHandler extends DB {
             //변수 grd를 데이터베이스 변수 RS에 입력한다.
             while(RS.next() == true) {
               int grade = RS.getInt("grade");// id필드 데이터에에 종속되어 있는 grade필드 데이터를 int변수로 저장 
-              System.out.println(id + "님의 회원 등급은 <" + grade + "> 입니다.");
+              System.out.println(id + "님의 회원 등급은 <" + grade + ">등급 입니다.");
 
               System.out.print("게시글 ");
               switch (grade) {
