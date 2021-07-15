@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class BoardHandler extends MemberHandler {
-  static Scanner sc = new Scanner(System.in);
+  static Scanner keyScan = new Scanner(System.in);
 
   public void insertBoard(String table) { // 멤버 모두
     System.out.println("게시글 추가");
@@ -15,11 +15,11 @@ public class BoardHandler extends MemberHandler {
 
       //키보드에서 데이터 입력
       System.out.print("\n제목 : ");
-      String title = sc.nextLine();
+      String title = keyScan.nextLine();
       // System.out.print("grade : "); // grade default 1
-      // int grade = Integer.parseInt(sc.nextLine());
+      // int grade = Integer.parseInt(keyScan.nextLine());
       System.out.print("내용 : ");
-      String contents = sc.nextLine();
+      String contents = keyScan.nextLine();
 
       msg = "insert into " + table + " (num, title, contents, recommended, written, id, viewcount)"
           + " values(" + table + "seq.nextval, ?, ?, 0, sysdate,'" + id + "', 0)";
@@ -44,11 +44,11 @@ public class BoardHandler extends MemberHandler {
     try {
       //수정처리는 대상필드 name,title
       System.out.print("수정할 게시물 제목 입력  :");
-      String title = sc.nextLine(); 
+      String title = keyScan.nextLine(); 
       System.out.print("제목 수정내역 입력  :");
-      String updatetitle= sc.nextLine(); 
+      String updatetitle= keyScan.nextLine(); 
       System.out.print("내용 수정내역 입력  :");
-      String contents = sc.nextLine();
+      String contents = keyScan.nextLine();
 
       msg = "update " + table + " set title='" + updatetitle +"', contents='"+ contents +"'  where  = '"+ title + "'";
 
@@ -68,7 +68,7 @@ public class BoardHandler extends MemberHandler {
   void deleteBoard(String table) { // admin 권한
     try {
       System.out.println("\n삭제할 게시글 번호 입력 : ");
-      int a = Integer.parseInt(sc.nextLine());
+      int a = Integer.parseInt(keyScan.nextLine());
 
       msg = "delete from " + table + " where num = " + a ;
       System.out.println(msg);
@@ -85,7 +85,7 @@ public class BoardHandler extends MemberHandler {
 
     try {
       System.out.println("게시글 검색 키워드: ");
-      String a = sc.nextLine();
+      String a = keyScan.nextLine();
       String msg = "select title,contents from " + table + " where title like '%" + a + "%' or contents like '%" + a + "%'" ;
       RS = ST.executeQuery(msg);
       while(RS.next()==true) {
@@ -123,7 +123,7 @@ public class BoardHandler extends MemberHandler {
       }
       //  게시글 번호로 내용 출력
       System.out.println("게시글 번호 입력: ");
-      String a = sc.nextLine();
+      String a = keyScan.nextLine();
       String msg = "select contents,reply from " + table + " where num= '" + a + "'" ;
       RS = ST.executeQuery(msg);
       while(RS.next() == true) {
@@ -142,7 +142,7 @@ public class BoardHandler extends MemberHandler {
         //        }
 
         System.out.println("댓글 보기 [y / N]");
-        if(sc.nextLine().equals("y")) {
+        if(keyScan.nextLine().equals("y")) {
           String reply = RS.getString("reply");
           System.out.println("------------------------------댓글------------------------------");
           System.out.println();
@@ -192,9 +192,9 @@ public class BoardHandler extends MemberHandler {
       if (id.equals("admin")) {
         memberHandler.selectAll();
         System.out.print("권한을 주고 싶은 ID 입력 : ");
-        String changeId = sc.nextLine();
+        String changeId = keyScan.nextLine();
         System.out.print("부여할 권한 범위 입력 (범위:1...3) : ");
-        String changeGrade = sc.nextLine();
+        String changeGrade = keyScan.nextLine();
 
         String updateMsg = "update id set grade = ? where id = ?";
         System.out.println(updateMsg);
