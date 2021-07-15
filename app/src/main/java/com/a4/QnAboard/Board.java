@@ -38,7 +38,7 @@ public class Board extends DB{
           System.out.println("2.게시글 작성");
           System.out.println("3.게시글 수정");
           System.out.println("4.게시글 삭제");
-          System.out.println("6. 뒤로 가기");
+          System.out.println("5. 뒤로 가기");
           System.out.print("입력 : ");
           int select = keyScan.nextInt();
 
@@ -50,7 +50,7 @@ public class Board extends DB{
             //case 5: boardHandler.search(input); break;
             //case 3: boardHandler.updateBoard(); break;
             //case 5: boardHandler.search(); break;
-            case 6: break loop;
+            case 5: break loop;
           }
         }
       } else {

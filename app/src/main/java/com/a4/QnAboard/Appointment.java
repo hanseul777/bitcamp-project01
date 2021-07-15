@@ -118,13 +118,21 @@ public class Appointment extends MemberHandler{ // 스터디 약속
       String updatetitle= sc.nextLine(); 
       System.out.print("장소 수정내역 입력  :");
       String location = sc.nextLine();
+      System.out.print("시간 수정내역 입력  :");
+      String time = sc.nextLine();
+      System.out.print("총인원 수정내역 입력  :");
+      int numlimit = Integer.parseInt(sc.nextLine());
 
 
-      msg = "update appointment set title =? , " ;
+      msg = "update appointment set title =?, location= ?, time = ?, numlimit =? where num = ?" ;
       System.out.println(msg);
       PST = CN.prepareStatement(msg);
-      PST.setInt(1, num);
+      PST.setString(1, updatetitle);
       PST.setString(2, location);
+      PST.setString(3, time);
+      PST.setInt(4, numlimit);
+      PST.setInt(5, num);
+
 
 
       int OK = ST.executeUpdate(msg);
