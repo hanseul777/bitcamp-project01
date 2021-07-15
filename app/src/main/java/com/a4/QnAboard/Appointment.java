@@ -69,9 +69,36 @@ public class Appointment extends MemberHandler{ // 스터디 약속
     }
     System.out.println();
   }
+  public void deleteBoard() {
+    DBbase();
+    //    NUM                                       NOT NULL NUMBER
+    //    TITLE                                     NOT NULL VARCHAR2(10)
+    //    LOCATION                                  NOT NULL VARCHAR2(10)
+    //    TIME                                      NOT NULL VARCHAR2(8)
+    //    REPLY                                              VARCHAR2(10)
+    //    WRITTEN                                   NOT NULL DATE
+    //    ID                                        NOT NULL VARCHAR2(10)
+    //    NUMLIMIT                                           NUMBER
+    //    VIEWCOUNT                                          NUMBER
+    try {
+      System.out.print("\n삭제할 게시글 번호 입력 : ");
+      int num = Integer.parseInt(sc.nextLine());
+      System.out.print("삭제할 게시글 제목 입력 : ");
+      String title = sc.nextLine();
 
+      msg = "delete from appointment where num = ? and title = ?" ;
+      PST = CN.prepareStatement(msg);
+      PST.setInt(1, num);
+      PST.setString(2, title);
 
-
-
-
+      int aa = PST.executeUpdate();
+      if (aa > 0) {
+        System.out.println(num + "번 게시글 '" + title +"' 삭제 성공했습니다.");
+      } else {
+        System.out.println(num + "번 게시글 '" + title +"' 삭제 실패했습니다.");
+      }//내부 else end
+    } catch (Exception e) {
+      System.out.println("에러이유" + e);
+    }
+  }//delete end
 }

@@ -11,24 +11,24 @@ public class Board extends DB{
     BoardHandler boardHandler = new BoardHandler();
     DB db = new DB();
     db.DBbase();
-    System.out.println("[게시판 목록] : Review/ FreeBoard/ Board/ Appointment");
-    System.out.println("-----------[자유게시판]------------------");
+    System.out.println("\"-----------------------------------[자유 게시판]---------------------------------------");
     boardHandler.boardBoard("freeboard");
     System.out.println("-----------------------------------------------------------------------------------------");
-    System.out.println("-----------[질문답변게시판]--------------");
+    System.out.println("-----------------------------------[질문답변 게시판]-------------------------------------");
     boardHandler.boardBoard("board");
     System.out.println("-----------------------------------------------------------------------------------------");
-    System.out.println("-----------[수업진도게시판]--------------");
+    System.out.println("-----------------------------------[수업진도 게시판]-------------------------------------");
     boardHandler.boardBoard("review");
     System.out.println("-----------------------------------------------------------------------------------------");
     System.out.println();
-    System.out.println("-----------[스터디모집게시판]--------------");
+    System.out.println("----------------------------------[스터디모집 게시판]------------------------------------");
     appointment.viewAppointment();
     System.out.println();
     System.out.println("-----------------------------------------------------------------------------------------");
     System.out.println();
 
-    System.out.print("게시판을 선택하세요 : ");
+    System.out.println("[게시판 목록] : freeBoard/ board/ review/ appointment");
+    System.out.println("입장할 게시판을 입력해주세요 : ");
     String input = keyScan.nextLine();
 
     try {
@@ -37,6 +37,7 @@ public class Board extends DB{
         loop: while (true) {
           System.out.println("1.게시판 조회");
           System.out.println("2.게시글 작성");
+          System.out.println("4.게시글 삭제");
           System.out.println("6. 뒤로 가기");
           System.out.print("입력 : ");
           int select = keyScan.nextInt();
@@ -45,7 +46,7 @@ public class Board extends DB{
             case 1: appointment.viewAppointment(); break;
             case 2: appointment.insertAppointment(); break;
             //case 3: boardHandler.updateBoard(input); break;
-            //case 4: boardHandler.deleteBoard(input); break;
+            case 4: boardHandler.deleteBoard(input); break;
             //case 5: boardHandler.search(input); break;
             case 6: break loop;
           }
