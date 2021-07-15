@@ -87,18 +87,19 @@ public class Board extends MemberHandler{
         while(RS.next() == true) {
           int grade = RS.getInt("grade");// id필드 데이터에에 종속되어 있는 grade필드 데이터를 int변수로 저장
           System.out.println(id + "님의 회원 등급은 " + grade + "번 입니다.");
+          System.out.println();
 
           switch (grade) {
             case 4:
-              System.out.print("[d] 게시글 삭제 ");
-              System.out.print("[s] 게시글 검색 ");
+              System.out.print("[d] 게시글 삭제\t");
             case 3:
-              System.out.print("[u] 게시글 수정 ");
+              System.out.print("[u] 게시글 수정\t");
             case 2:
-              System.out.print("[i] 게시글 작성 ");
+              System.out.print("[i] 게시글 작성\t");
             case 1:
-              System.out.print("[v] 게시판 조회 ");
-              System.out.print("[b] 뒤로 가기");
+              System.out.print("[v] 게시판 조회\t");
+              System.out.print("[s] 게시글 검색\t");
+              System.out.println("[b] 뒤로 가기");
             default:
               break;
           }

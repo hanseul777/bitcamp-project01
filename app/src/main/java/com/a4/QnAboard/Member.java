@@ -7,7 +7,6 @@ public class Member {
     DB db = new DB();
     Id id = new Id();
 
-
     db.DBbase();
 
     id.memberJoin();
