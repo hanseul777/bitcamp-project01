@@ -20,16 +20,13 @@ public class BoardHandler extends MemberHandler {
       // int grade = Integer.parseInt(sc.nextLine());
       System.out.print("내용 : ");
       String contents = sc.nextLine();
-      System.out.print("댓글 : ");
-      String reply = sc.nextLine();
 
 
-      msg = "insert into " + table + " (num, title, contents, reply, recommended, join_date, id, viewcount)"
-          + " values(seq.nextval, ?, ?, ?, 0, sysdate,'" + id + "', 0)";
+      msg = "insert into " + table + " (num, title, contents, recommended, join_date, id, viewcount)"
+          + " values(seq.nextval, ?, ?, 0, sysdate,'" + id + "', 0)";
       PST = CN.prepareStatement(msg);
       PST.setString(1, title);
       PST.setString(2, contents);
-      PST.setString(3, reply);
       // PST.setString(5, id);
 
       System.out.println(msg);
