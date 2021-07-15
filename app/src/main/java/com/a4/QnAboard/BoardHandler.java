@@ -43,10 +43,9 @@ public class BoardHandler extends MemberHandler {
   }
 
   void updateBoard(String table) { // 작성한 사람
-    //    DBbase();
+    DBbase();
     try {
       //수정처리는 대상필드 name,title
-
       System.out.print("수정할 게시물 제목 입력  :");
       String title = sc.nextLine(); 
       System.out.print("제목 수정내역 입력  :");
@@ -139,12 +138,12 @@ public class BoardHandler extends MemberHandler {
 
         System.out.println("------------------------------댓글------------------------------");
         System.out.println();
-        for(int i =0; i < 5; i++) {
-          String reply = RS.getString("reply");
-          System.out.println(reply);
-        }
+        //        for(int i =0; i < 5; i++) {
+        //          String reply = RS.getString("reply");
+        //          System.out.println(reply);
+        //        }
 
-        System.out.println("댓글 더보기 [y / N]");
+        System.out.println("댓글 보기 [y / N]");
         if(sc.nextLine().equals("y")) {
           String reply = RS.getString("reply");
           System.out.println("------------------------------댓글------------------------------");

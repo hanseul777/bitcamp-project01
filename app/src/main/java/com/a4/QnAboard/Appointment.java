@@ -86,19 +86,55 @@ public class Appointment extends MemberHandler{ // 스터디 약속
       System.out.print("삭제할 게시글 제목 입력 : ");
       String title = sc.nextLine();
 
-      msg = "delete from appointment where num = ? and title = ?" ;
-      PST = CN.prepareStatement(msg);
-      PST.setInt(1, num);
-      PST.setString(2, title);
-
-      int aa = PST.executeUpdate();
-      if (aa > 0) {
-        System.out.println(num + "번 게시글 '" + title +"' 삭제 성공했습니다.");
+      if(!sc.nextLine().equals("y")) {
+        System.out.println("회원 탈퇴 취소하셨습니다.");
       } else {
-        System.out.println(num + "번 게시글 '" + title +"' 삭제 실패했습니다.");
-      }//내부 else end
+        msg = "delete from appointment where num = ? and title = ?" ;
+        PST = CN.prepareStatement(msg);
+        PST.setInt(1, num);
+        PST.setString(2, title);
+
+        int aa = PST.executeUpdate();
+        if (aa > 0) {
+          System.out.println(num + "번 게시글 '" + title +"' 삭제 성공했습니다.");
+        } else {
+          System.out.println(num + "번 게시글 '" + title +"' 삭제 실패했습니다.");
+        }//내부 else end
+
+      }//delete y/N end
     } catch (Exception e) {
       System.out.println("에러이유" + e);
     }
   }//delete end
+
+  public void updateBoard() {
+    DBbase();
+    try {
+      //수정처리는 대상필드 name,title
+      System.out.print("수정할 게시물 번호 입력  :");
+      int num = Integer.parseInt(sc.nextLine());
+
+      System.out.print("제목 수정내역 입력  :");
+      String updatetitle= sc.nextLine(); 
+      System.out.print("장소 수정내역 입력  :");
+      String location = sc.nextLine();
+
+
+      msg = "update appointment set title =? , " ;
+      System.out.println(msg);
+      PST = CN.prepareStatement(msg);
+      PST.setInt(1, num);
+      PST.setString(2, location);
+
+
+      int OK = ST.executeUpdate(msg);
+      if (OK>0) {
+        System.out.println( "게시글 수정 성공");
+      }else {
+        System.out.println( "게시글 수정 실패");
+      }
+
+    }catch(Exception ex) { }    
+  }
 }
+
