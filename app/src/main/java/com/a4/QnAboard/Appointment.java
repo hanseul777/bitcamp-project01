@@ -139,27 +139,27 @@ public class Appointment extends MemberHandler{ // 스터디 약속
 
     }catch(Exception ex) { }
   }
-  public void reply() {
-    System.out.println("댓글추가");
-    DBbase();
-    try {
-      ST = CN.createStatement();
-
-      System.out.print("\n댓글입력 : ");
-      String contents = sc.nextLine();
-
-      msg = "insert into reply (contents) values(?)";
-
-      PST = CN.prepareStatement(msg);
-      PST.setString(1, contents);
-
-      System.out.println(msg);
-
-      int OK = PST.executeUpdate();
-      if (OK>0) {
-        System.out.println("댓글이 등록되었습니다.");
-      }else { System.out.println("댓글등록을 실패했습니다.");}
-    }catch (Exception e) {}
-  }
+  //  public void reply() {
+  //    System.out.println("댓글추가");
+  //    DBbase();
+  //    try {
+  //      ST = CN.createStatement();
+  //
+  //      System.out.print("\n댓글입력 : ");
+  //      String contents = sc.nextLine();
+  //
+  //      msg = "insert into reply (contents) values(?)";
+  //
+  //      PST = CN.prepareStatement(msg);
+  //      PST.setString(1, contents);
+  //
+  //      System.out.println(msg);
+  //
+  //      int OK = PST.executeUpdate();
+  //      if (OK>0) {
+  //        System.out.println("댓글이 등록되었습니다.");
+  //      }else { System.out.println("댓글등록을 실패했습니다.");}
+  //    }catch (Exception e) {}
+  //  }
 }
 

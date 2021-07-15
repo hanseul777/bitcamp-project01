@@ -7,7 +7,15 @@ public class MainScreen {
   Scanner selectionFor = new Scanner(System.in);
   BoardHandler mainScreenBoard = new BoardHandler();
   Appointment mainScreenAppointment = new Appointment();
-  
+
+  void mainScreen() {
+    top();
+    quarter1Mid();
+    quarter2Mid();
+    quarter3Mid();
+    quarter4Mid();
+  }
+
   void top () {
     System.out.printf("========================================\n");
     System.out.printf("비트캠프 수강생들을 위한 교류 공간 Since 1994\n");
@@ -38,7 +46,8 @@ public class MainScreen {
     System.out.printf("\n1.회원 가입 2.로그인 3.회원 탈퇴 4.로그아웃 5. 게시판 관리\n");
     System.out.printf("==========================================\n");
     System.out.printf("9. 종료\n");
-    System.out.printf("원하는 메뉴로 접근하려면 해당 숫자를 입력하세요. >>> \n");
+    System.out.printf("원하는 메뉴로 접근하려면 해당 숫자를 입력하세요. >>> ");
+
   }
 
 
