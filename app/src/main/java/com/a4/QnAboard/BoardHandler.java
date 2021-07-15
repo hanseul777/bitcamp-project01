@@ -56,7 +56,7 @@ public class BoardHandler extends MemberHandler {
 
 
       int OK = ST.executeUpdate(msg);
-      if (OK>0) {
+      if (OK > 0) {
         System.out.println( "게시글 수정 성공");
       }else {
         System.out.println( "게시글 수정 실패");
@@ -74,7 +74,7 @@ public class BoardHandler extends MemberHandler {
       System.out.println(msg);
       int aa = ST.executeUpdate(msg);
 
-      if (aa>0) {
+      if (aa > 0) {
         System.out.println(a + "게시글 삭제");
       } else {System.out.println(a + "게시글 삭제실패했습니다.");}
 
@@ -108,7 +108,7 @@ public class BoardHandler extends MemberHandler {
       System.out.printf("%10s %10s %20s %15s %4s %3s%n"
           , "번호", "제목","좋아요","날짜","ID","조회수");
       System.out.println();
-      for(int i =0; i < 10 && RS.next() == true; i++) {
+      for(int i = 0; i < 10 && RS.next() == true; i++) {
         int num = RS.getInt("num");
         String title = RS.getString("title");
         String contents = RS.getString("contents");
@@ -169,7 +169,7 @@ public class BoardHandler extends MemberHandler {
       System.out.printf("%10s %10s %10s %20s %15s %4s %3s%n"
           , "번호", "제목", "내용","좋아요","날짜","ID","조회수");
       System.out.println();
-      for(int i =0; i < 5 && RS.next() == true; i++) {
+      for(int i = 0; i < 5 && RS.next() == true; i++) {
         int num = RS.getInt("num");
         String title = RS.getString("title");
         String contents = RS.getString("contents");
