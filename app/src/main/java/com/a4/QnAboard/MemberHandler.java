@@ -19,8 +19,8 @@ public class MemberHandler extends DB {
       //      System.out.println(msg);
 
       // 자바의 정석 39p 참고
-      System.out.printf("%10s %10s %10s %20s %20s %15s %4s %3s%n"
-          , "ID", "등급", "name", "email","mobile","날짜","좋아요","소속");
+      System.out.printf("%10s %4s %20s %20s %18s %15s %10s %10s%n"
+          , "ID", "등급", "이름", "이메일주소","핸드폰번호","가입날짜","좋아요","소속클래스");
       System.out.println();
       while(RS.next() == true) {
         String id = RS.getString("id");
@@ -32,7 +32,7 @@ public class MemberHandler extends DB {
         int recommended = RS.getInt("recommended");
         String belongs = RS.getString("belongs");
         //System.out.printf(id + "\t" + grade +  "\t" + name+ "\t" + email+ "\t" + mobile+ "\t" + date+ "\t" + recommended+ "\t" + belongs);
-        System.out.printf("%10s %10s %10s %20s %20s %15s %4s %3s%n"
+        System.out.printf("%10s %4s %20s %30s %20s %20s %10s %15s%n"
             , id, grade, name, email, mobile, date, recommended, belongs);
       }
     } catch (Exception e) {

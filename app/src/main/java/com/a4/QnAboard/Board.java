@@ -58,33 +58,47 @@ public class Board extends DB{
       } else {
         if (input.equals("f")) {
           input = "freeBoard";
-
-          boardHandler.viewBoard(input);
-          loop: while (true) {
-            System.out.println("1.게시판 조회");
-            System.out.println("2.게시글 작성");
-            System.out.println("3.게시글 수정");
-            System.out.println("4.게시글 삭제");
-            System.out.println("5.게시글 검색");
-            System.out.println("6.뒤로 가기");
-            System.out.print("입력 : ");
-            int select  = keyScan.nextInt();
-
-            switch (select) {
-              case 1: boardHandler.viewReply(input); break;
-              case 2: boardHandler.insertBoard(input); break;
-              case 3: boardHandler.updateBoard(input); break;
-              case 4: boardHandler.deleteBoard(input); break;
-              case 5: boardHandler.search(input); break;
-              case 6: break loop;
-            }
-          }
+          boardList(input);
+        } else if (input.equals("b")) {
+          input = "board";
+          boardList(input);
+        } else if (input.equals("r")) {
+          input = "review";
+          boardList(input);
         }
       }
     } catch(Exception ex) {
       System.out.println("존재하지 않는 게시판입니다.");
     }
+  }
 
+  public void boardList(String input) {
+
+    Appointment appointment = new Appointment();
+    BoardHandler boardHandler = new BoardHandler();
+    DB db = new DB();
+    db.DBbase();
+
+    boardHandler.viewBoard(input);
+    loop: while (true) {
+      System.out.println("1.게시판 조회");
+      System.out.println("2.게시글 작성");
+      System.out.println("3.게시글 수정");
+      System.out.println("4.게시글 삭제");
+      System.out.println("5.게시글 검색");
+      System.out.println("6.뒤로 가기");
+      System.out.print("입력 : ");
+      int select  = keyScan.nextInt();
+
+      switch (select) {
+        case 1: boardHandler.viewReply(input); break;
+        case 2: boardHandler.insertBoard(input); break;
+        case 3: boardHandler.updateBoard(input); break;
+        case 4: boardHandler.deleteBoard(input); break;
+        case 5: boardHandler.search(input); break;
+        case 6: break loop;
+      }
+    }
   }
 }
 /*

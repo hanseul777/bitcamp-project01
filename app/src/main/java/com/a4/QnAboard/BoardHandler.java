@@ -21,14 +21,9 @@ public class BoardHandler extends MemberHandler {
       System.out.print("내용 : ");
       String contents = sc.nextLine();
 
+      msg = "insert into " + table + " (num, title, contents, recommended, written, id, viewcount)"
+          + " values(" + table + "seq.nextval, ?, ?, 0, sysdate,'" + id + "', 0)";
 
-<<<<<<< HEAD
-      msg = "insert into " + table + " (num, title, contents, reply, recommended, join_date, id, viewcount)"
-          + " values(f.nextval, ?, ?, ?, 0, sysdate,'" + id + "', 0)";
-=======
-      msg = "insert into " + table + " (num, title, contents, recommended, join_date, id, viewcount)"
-          + " values(seq.nextval, ?, ?, 0, sysdate,'" + id + "', 0)";
->>>>>>> b8fe718ae6fe11366dc89d01b326d59176bcb08f
       PST = CN.prepareStatement(msg);
       PST.setString(1, title);
       PST.setString(2, contents);
@@ -119,7 +114,7 @@ public class BoardHandler extends MemberHandler {
         String contents = RS.getString("contents");
         //        String reply = RS.getString("reply");
         int recommended = RS.getInt("recommended");
-        Date date  = RS.getDate("join_date");
+        Date date  = RS.getDate("written");
         String id = RS.getString("id");
         int viewCount = RS.getInt("viewcount");
         //System.out.printf(id + "\t" + grade +  "\t" + name+ "\t" + email+ "\t" + mobile+ "\t" + date+ "\t" + recommended+ "\t" + belongs);
@@ -185,7 +180,7 @@ public class BoardHandler extends MemberHandler {
         String contents = RS.getString("contents");
         //        String reply = RS.getString("reply");
         int recommended = RS.getInt("recommended");
-        Date date  = RS.getDate("join_date");
+        Date date  = RS.getDate("written");
         String id = RS.getString("id");
         int viewCount = RS.getInt("viewcount");
         //System.out.printf(id + "\t" + grade +  "\t" + name+ "\t" + email+ "\t" + mobile+ "\t" + date+ "\t" + recommended+ "\t" + belongs);
