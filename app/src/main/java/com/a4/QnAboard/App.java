@@ -30,6 +30,7 @@ public class App extends MemberHandler{
           System.out.println("게시판을 종료합니다.");
           System.exit(0);
         case 99: adminMode.admin(); break;
+        default: System.out.println("가능한 메뉴만 선택해주세요^^");
 
       }//switch end
     }
