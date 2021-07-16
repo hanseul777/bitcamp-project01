@@ -233,5 +233,4 @@ public class BoardHandler extends MemberHandler {
     }
     System.out.println();
   }
-
 }
