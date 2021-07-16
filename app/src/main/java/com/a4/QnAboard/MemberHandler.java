@@ -48,19 +48,21 @@ public class MemberHandler extends DB {
         id = sc.nextLine();
         System.out.print("password입력: ");
         password =sc.nextLine();
+        System.out.println();
 
-        String crt = "select count(id) as cnt from id where id = '" + id + "' and pwd = '" + password + "'";
-        //id와 pwd입력값이 데이터베이스와 일치하면 id의 갯수를 카운트한다. 변수 crt에 저장
-        RS = ST.executeQuery(crt);
+        String comparision =
+            "select count(id) as cnt from id where id = '" + id + "' and pwd = '" + password + "'";
+        //id와 pwd입력값이 데이터베이스와 일치하면 id의 갯수를 카운트한다. 변수 comparision에 저장
+        RS = ST.executeQuery(comparision);
         //쿼리에 변수 crt를 입력
         if (RS.next() == true) {
-          int cnt = RS.getInt("cnt");
-          // 임시로 설정된 cnt필드의 값을 int cnt에 저장한다.
+          int conditon = RS.getInt("cnt");
+          // 임시로 설정된 conditon필드의 값을 int conditon에 저장한다.
           // 값이 일치하는 경우 : 1
           // 값이 일치하지 않는 경우 : 0
-          if (cnt > 0) { // id,pw 일치하는경우
-            String grd = "select grade from id where id = '" + id + "'";//입력값 id가 포함된 쿼리문을 변수grd에 입력
-            RS = ST.executeQuery(grd);
+          if (conditon > 0) { // id,pw 일치하는경우
+            String text = "select grade from id where id = '" + id + "'";//입력값 id가 포함된 쿼리문을 변수text에 입력
+            RS = ST.executeQuery(text);
             //변수 grd를 데이터베이스 변수 RS에 입력한다.
             while(RS.next() == true) {
               int grade = RS.getInt("grade");// id필드 데이터에에 종속되어 있는 grade필드 데이터를 int변수로 저장 

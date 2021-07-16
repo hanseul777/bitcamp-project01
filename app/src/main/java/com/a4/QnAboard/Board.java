@@ -25,7 +25,8 @@ public class Board extends MemberHandler{
     System.out.println("-----------------------------------------------------------------------------------------");
     System.out.println();
     System.out.println("[게시판 목록] : freeBoard/ board/ review/ appointment");
-    System.out.println("[단축어] : [f]-freeBoard [b]-board [r]-review [a]-appointment");
+    System.out.println("[단축어] : [f]-자유 게시판 [b]-질문답변 게시판 "
+        + "[r]-수업진도 게시판 [a]-스터디모집 게시판 [c]-취소");
     System.out.println();
     System.out.print("입장할 게시판을 입력해주세요 : ");
     String input = keyScan.nextLine();
@@ -40,7 +41,7 @@ public class Board extends MemberHandler{
           System.out.println("2.게시글 작성");
           System.out.println("3.게시글 수정");
           System.out.println("4.게시글 삭제");
-          System.out.println("5. 뒤로 가기");
+          System.out.println("5.뒤로 가기");
           System.out.print("입력 : ");
           int select = keyScan.nextInt();
 
@@ -49,9 +50,6 @@ public class Board extends MemberHandler{
             case 2: appointment.insertAppointment(); break;
             case 3: appointment.updateBoard(); break;
             case 4: appointment.deleteBoard(); break;
-            //case 5: boardHandler.search(input); break;
-            //case 3: boardHandler.updateBoard(); break;
-            //case 5: boardHandler.search(); break;
             case 5: break loop;
           }
         }
@@ -65,6 +63,8 @@ public class Board extends MemberHandler{
         } else if (input.equals("r")) {
           input = "review";
           boardList(input);
+        } else if (input.equals("c")) {
+          return;
         }
       }
     } catch(Exception ex) {
