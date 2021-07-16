@@ -128,15 +128,19 @@ public class BoardHandler extends MemberHandler {
       String msg = "select contents,reply from " + table + " where num= '" + a + "'" ;
       RS = ST.executeQuery(msg);
       while(RS.next() == true) {
+
         String contents = RS.getString("contents");
 
         System.out.println("------------------------------내용------------------------------");
         System.out.println();
         System.out.println(contents);
 
-        updateviewCount(); break;
 
-
+        //        String updateMsg = "update id set grade = ? where id = ?";
+        //        System.out.println(updateMsg);
+        //        PST = CN.prepareStatement(updateMsg);
+        //        PST.setString(1, changeGrade);
+        //        PST.setString(2, changeId);
 
         //        System.out.println("------------------------------댓글------------------------------");
         //        System.out.println();
@@ -162,12 +166,22 @@ public class BoardHandler extends MemberHandler {
         //              break loop;
         //          }
         //        }
+        try {   
+          String msg2 = "update " + table + " set viewcount = viewcount+1 where num =" + a ;
+          RS = ST.executeQuery(msg2);
+          while(RS.next() == true) {
+            int num = RS.getInt("num");
+            System.out.println(num);
+
+          }
+        }catch (Exception e) { } 
+        break;
       }
     } catch (Exception e) {
       System.out.println("에러이유" + e);
-    }    
-    System.out.println();
+    }
   }
+
 
   public void viewBoard (String table) {
     DBbase();
@@ -229,15 +243,15 @@ public class BoardHandler extends MemberHandler {
     System.out.println();
   }
 
-  public void updateviewCount() {
-    try {
-      DBbase();
-      String msg = "update board set viewcount = viewcount+1 where num = ?";
-      System.out.println(msg);
-      PST = CN.prepareStatement(msg);
-      int num=0;
-      PST.setInt(1,num);
-    }catch(Exception e) {}
-  }
+  //  public void updateviewCount() {
+  //    try {
+  //      DBbase();
+  //      String msg = "update board set viewcount = viewcount+1 where num = ?";
+  //      System.out.println(msg);
+  //      PST = CN.prepareStatement(msg);
+  //      int num=0;
+  //      PST.setInt(1,num);
+  //    }catch(Exception e) {}
+  //  }
 
 }

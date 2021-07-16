@@ -9,7 +9,6 @@ public class App extends MemberHandler{
     db.DBbase();
     MainScreen main = new MainScreen();
     MemberHandler memberManagement = new MemberHandler();
-    Member join = new Member();
     Board board = new Board();
 
     main.mainScreen();
@@ -26,7 +25,8 @@ public class App extends MemberHandler{
         case 4 : memberManagement.Logout(); break;
         case 5 : board.board(); break;
         case 9 :
-          System.out.println("메인화면으로 이동합니다."); break; 
+          System.out.println("종료합니다.");
+          System.exit(0);        
         default : System.out.println("잘못 입력하셨습니다.");
 
       }//switch end
