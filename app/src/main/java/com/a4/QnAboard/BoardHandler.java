@@ -134,6 +134,10 @@ public class BoardHandler extends MemberHandler {
         System.out.println();
         System.out.println(contents);
 
+        updateviewCount(); break;
+
+
+
         //        System.out.println("------------------------------댓글------------------------------");
         //        System.out.println();
 
@@ -223,6 +227,17 @@ public class BoardHandler extends MemberHandler {
       System.out.println("잘못된 접근입니다.");
     }
     System.out.println();
+  }
+
+  public void updateviewCount() {
+    try {
+      DBbase();
+      String msg = "update board set viewcount = viewcount+1 where num = ?";
+      System.out.println(msg);
+      PST = CN.prepareStatement(msg);
+      int num=0;
+      PST.setInt(1,num);
+    }catch(Exception e) {}
   }
 
 }
