@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Appointment extends MemberHandler{ // 스터디 약속
-  static Scanner sc = new Scanner(System.in);
+  static Scanner keyScan = new Scanner(System.in);
 
   public void viewAppointment() {
     DBbase();
@@ -43,13 +43,13 @@ public class Appointment extends MemberHandler{ // 스터디 약속
     try {
       ST = CN.createStatement();
       System.out.print("\n제목 : ");
-      String title = sc.nextLine();
+      String title = keyScan.nextLine();
       System.out.print("장소 : ");
-      String location = sc.nextLine();
+      String location = keyScan.nextLine();
       System.out.print("시간 : ");
-      String time = sc.nextLine();
+      String time = keyScan.nextLine();
       System.out.print("정원 : ");
-      int numLimit = Integer.parseInt(sc.nextLine());
+      int numLimit = Integer.parseInt(keyScan.nextLine());
       msg = "insert into appointment(num, title, location, time, written, id, numlimit, viewcount) "
           + "values(seq.nextval, ?, ?, ?, sysdate, '" + id  + "',? ,0)";
       PST = CN.prepareStatement(msg);
@@ -69,7 +69,7 @@ public class Appointment extends MemberHandler{ // 스터디 약속
     }
     System.out.println();
   }
-  public void deleteBoard() {
+  public void deleteAppoinment() {
     DBbase();
     //    NUM                                       NOT NULL NUMBER
     //    TITLE                                     NOT NULL VARCHAR2(10)
@@ -82,11 +82,11 @@ public class Appointment extends MemberHandler{ // 스터디 약속
     //    VIEWCOUNT                                          NUMBER
     try {
       System.out.print("\n삭제할 게시글 번호 입력 : ");
-      int num = Integer.parseInt(sc.nextLine());
+      int num = Integer.parseInt(keyScan.nextLine());
       System.out.print("삭제할 게시글 제목 입력 : ");
-      String title = sc.nextLine();
+      String title = keyScan.nextLine();
 
-      if(!sc.nextLine().equals("y")) {
+      if(!keyScan.nextLine().equals("y")) {
         System.out.println("회원 탈퇴 취소하셨습니다.");
       } else {
         msg = "delete from appointment where num = ? and title = ?" ;
@@ -107,19 +107,19 @@ public class Appointment extends MemberHandler{ // 스터디 약속
     }
   }//delete end
 
-  public void updateBoard() {
+  public void updateAppointment() {
     DBbase();
     try {
       //수정처리는 대상필드 name,title
 
       System.out.print("수정할 게시글 제목 입력 :");
-      String updatetitle= sc.nextLine(); 
+      String updatetitle= keyScan.nextLine(); 
       System.out.print("장소 수정내역 입력  :");
-      String location = sc.nextLine();
+      String location = keyScan.nextLine();
       System.out.print("시간 수정내역 입력  :");
-      String time = sc.nextLine();
+      String time = keyScan.nextLine();
       System.out.print("총인원 수정내역 입력  :");
-      int numlimit = Integer.parseInt(sc.nextLine());
+      int numlimit = Integer.parseInt(keyScan.nextLine());
 
 
       msg = "update appointment set location= ?, time = ?, numlimit =? where title = ?" ;
@@ -139,6 +139,81 @@ public class Appointment extends MemberHandler{ // 스터디 약속
 
     }catch(Exception ex) { }
   }
+
+  public void joinStudy() {
+
+
+    try {
+      System.out.print("참여할 스터디 게시판의 번호를 선택하세요 : ");
+      String number = keyScan.nextLine();
+      String msg = "select title,location,time,numLimit from appointment where num= '" + number + "'" ;
+
+      RS = ST.executeQuery(msg);
+      while(RS.next() == true) {
+
+        String location = RS.getString("location");
+        String time = RS.getString("time");
+        int numLimit = RS.getInt("numLimit");
+
+        int request = keyScan.nextInt();
+        final int architecture = request | 0x01; // 0000 0001
+        final int documentize = request | 0x02; // 0000 0010
+        final int coder1 = request | 0x04; // 0000 0100
+        final int coder2 = request | 0x08; // 0000 1000
+
+        System.out.println("-----------------------------스터디 게시판----------------------------");
+        System.out.println();
+        System.out.printf("'%s'에서 '%s'까지 '%d'명 모집\n", location, time, numLimit);
+        // 월요일 할일 : appointment assign 컬럼추가
+
+        if (architecture != 0) {
+          System.out.printf("%30s ■","프로젝트매니저");
+        } else if (architecture == 0) {
+          System.out.printf("%30s □","프로젝트매니저");
+        } if (documentize != 0) {
+          System.out.printf("%30s ■","문서화책임자");
+        } else if (documentize == 0) {
+          System.out.printf("%30s □","문서화책임자");
+        } if (coder1 != 0) {
+          System.out.printf("%30s ■","무지성개발자");
+        } else if (coder1 == 0) {
+          System.out.printf("%30s □","무지성개발자");
+        } if (coder2 != 0) {
+          System.out.printf("%30s ■","지성개발자");
+        } else if (coder2 == 0) {
+          System.out.printf("%30s □","지성개발자");
+        }
+
+        //■ □
+        // sql 문으로 assign 비교 적용
+        int compare = architecture | documentize | coder1 | coder2;
+        int assign = 0;
+        if(compare != 0) {
+          System.out.println("해당 포지션은 마감되었습니다.");
+        } else {
+
+          System.out.println("참가완료되었습니다.");
+        }
+        System.out.println();
+      }
+    } catch(Exception e) { }
+
+
+    /*
+
+
+    DBbase();
+    msg = "select numLimit from appointment where num = ?";
+    PST
+      RS = ST.executeQuery(msg);
+
+    if () {
+
+    }
+     */
+
+  }
+
   //  public void reply() {
   //    System.out.println("댓글추가");
   //    DBbase();
@@ -146,7 +221,7 @@ public class Appointment extends MemberHandler{ // 스터디 약속
   //      ST = CN.createStatement();
   //
   //      System.out.print("\n댓글입력 : ");
-  //      String contents = sc.nextLine();
+  //      String contents = keyScan.nextLine();
   //
   //      msg = "insert into reply (contents) values(?)";
   //

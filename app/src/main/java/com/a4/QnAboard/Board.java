@@ -36,22 +36,61 @@ public class Board extends MemberHandler{
         appointment.viewAppointment();
 
         loop: while (true) {
-          System.out.println("1.게시판 조회");
-          System.out.println("2.게시글 작성");
-          System.out.println("3.게시글 수정");
-          System.out.println("4.게시글 삭제");
-          System.out.println("5.뒤로 가기");
-          System.out.print("입력 : ");
-          int select = keyScan.nextInt();
 
-          switch (select) {
-            case 1: appointment.viewAppointment(); break;
-            case 2: appointment.insertAppointment(); break;
-            case 3: appointment.updateBoard(); break;
-            case 4: appointment.deleteBoard(); break;
-            case 5: break loop;
+          String text = "select grade from id where id = '" + id + "'";//입력값 id가 포함된 쿼리문을 변수text에 입력
+          RS = ST.executeQuery(text);
+          //변수 text를 데이터베이스 변수 RS에 입력한다.
+          while(RS.next() == true) {
+            int grade = RS.getInt("grade");// id필드 데이터에에 종속되어 있는 grade필드 데이터를 int변수로 저장
+            System.out.println(id + "님의 회원 등급은 " + grade + "번 입니다.");
+            System.out.println();
+
+            switch (grade) {
+              case 4:
+                System.out.print("[d] 게시글 삭제\t");
+              case 3:
+                System.out.print("[u] 게시글 수정\t");
+              case 2:
+                System.out.print("[i] 게시글 작성\t");
+              case 1:
+                System.out.print("[v] 게시판 조회\t");
+                System.out.print("[j] 스터디 참여\t");
+                System.out.print("[s] 게시글 검색\t");
+                System.out.print("[b] 뒤로 가기\n");
+              default:
+                break;
+            }
+            System.out.print("[명령어]를 입력하세요 : ");
+            String select  = keyScan.nextLine();
+            switch (select) {
+              case "d": appointment.deleteAppoinment(); break;
+              case "u": appointment.updateAppointment(); break;
+              case "i": appointment.insertAppointment(); break;
+              case "v": appointment.viewAppointment(); break;
+              case "j": appointment.joinStudy(); break;
+              case "b": break loop;
+            }
           }
+
+          // System.out.print("[1] 게시판 조회\t");
+          //System.out.print("[2] 게시글 작성\t");
+          //   System.out.print("[3] 게시글 수정\t");
+          //   System.out.print("[4]게시글 삭제\t");
+          //   System.out.print("[5]스터디 참여\t");
+          //   System.out.print("[6]뒤로 가기\n");
+          //   System.out.print("[번호]를 입력하세요 : ");
+          //   int select = keyScan.nextInt();
+
+          //   switch (select) {
+          //     case 1: appointment.viewAppointment(); break;
+          //    case 2: appointment.insertAppointment(); break;
+          //    case 3: appointment.updateBoard(); break;
+          //   case 4: appointment.deleteBoard(); break;
+          //   case 5: appointment.joinStudy(); break;
+          //   case 6: break loop;
+
         }
+
       } else {
         if (input.equals("f")) {
           input = "freeBoard";
@@ -79,10 +118,10 @@ public class Board extends MemberHandler{
     boardHandler.viewBoard(input);
     try {
       loop: while (true) {
-        String text = "select grade from id where id = '" + id + "'";//입력값 id가 포함된 쿼리문을 변수grd에 입력
+        String text = "select grade from id where id = '" + id + "'";//입력값 id가 포함된 쿼리문을 변수text에 입력
         RS = ST.executeQuery(text);
 
-        //변수 grd를 데이터베이스 변수 RS에 입력한다.
+        //변수 text를 데이터베이스 변수 RS에 입력한다.
         while(RS.next() == true) {
           int grade = RS.getInt("grade");// id필드 데이터에에 종속되어 있는 grade필드 데이터를 int변수로 저장
           System.out.println(id + "님의 회원 등급은 " + grade + "번 입니다.");
@@ -102,7 +141,7 @@ public class Board extends MemberHandler{
             default:
               break;
           }
-          System.out.print("입력 : ");
+          System.out.print("[명령어]를 입력하세요 : ");
           String select  = keyScan.nextLine();
           switch (select) {
             case "d": boardHandler.deleteBoard(input); break;
