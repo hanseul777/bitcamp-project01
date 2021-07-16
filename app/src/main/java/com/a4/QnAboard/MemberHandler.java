@@ -56,11 +56,11 @@ public class MemberHandler extends DB {
         RS = ST.executeQuery(comparision);
         //쿼리에 변수 crt를 입력
         if (RS.next() == true) {
-          int conditon = RS.getInt("cnt");
-          // 임시로 설정된 conditon필드의 값을 int conditon에 저장한다.
+          int condition  = RS.getInt("cnt");
+          // 임시로 설정된 comparison 필드의 값을 int comparison 에 저장한다.
           // 값이 일치하는 경우 : 1
           // 값이 일치하지 않는 경우 : 0
-          if (conditon > 0) { // id,pw 일치하는경우
+          if (condition  > 0) { // id,pw 일치하는경우
             String text = "select grade from id where id = '" + id + "'";//입력값 id가 포함된 쿼리문을 변수text에 입력
             RS = ST.executeQuery(text);
             //변수 grd를 데이터베이스 변수 RS에 입력한다.
@@ -127,8 +127,8 @@ public class MemberHandler extends DB {
 
       System.out.println(msg);
 
-      int OK = PST.executeUpdate();
-      if (OK>0) {
+      int condition  = PST.executeUpdate();
+      if (condition  > 0) {
         System.out.println(id + "회원가입 성공했습니다.");
       } else {System.out.println(id + "회원가입 실패했습니다.");}
     }catch (Exception e) { } 
@@ -152,8 +152,8 @@ public class MemberHandler extends DB {
         PST.setString(1, id);
         PST.setString(2, password);
 
-        int aa = PST.executeUpdate();
-        if (aa > 0) {
+        int condition  = PST.executeUpdate();
+        if (condition  > 0) {
           System.out.println(id + " 회원탈퇴 성공했습니다.");
         } else {
           System.out.println("회원정보 다시 입력부탁드립니다.");

@@ -54,9 +54,8 @@ public class BoardHandler extends MemberHandler {
 
       System.out.println(msg);
 
-
-      int OK = ST.executeUpdate(msg);
-      if (OK > 0) {
+      int condition = ST.executeUpdate(msg);
+      if (condition > 0) {
         System.out.println( "게시글 수정 성공");
       }else {
         System.out.println( "게시글 수정 실패");
@@ -72,9 +71,9 @@ public class BoardHandler extends MemberHandler {
 
       msg = "delete from " + table + " where num = " + a ;
       System.out.println(msg);
-      int aa = ST.executeUpdate(msg);
+      int condition = ST.executeUpdate(msg);
 
-      if (aa > 0) {
+      if (condition > 0) {
         System.out.println(a + "게시글 삭제");
       } else {System.out.println(a + "게시글 삭제실패했습니다.");}
 
@@ -85,20 +84,19 @@ public class BoardHandler extends MemberHandler {
 
     try {
       System.out.println("게시글 검색 키워드: ");
-      String a = keyScan.nextLine();
-      String msg = "select title,contents from " + table + " where title like '%" + a + "%' or contents like '%" + a + "%'" ;
+      String search = keyScan.nextLine();
+      String msg = "select title,contents from " + table + " where title like '%" + search + "%' or contents like '%" + search + "%'" ;
       RS = ST.executeQuery(msg);
-      while(RS.next()==true) {
+      while(RS.next() == true) {
         String contents = RS.getString("contents");
         String title = RS.getString("title");
         System.out.println(title +"\t" + contents);
       }
-    }catch(Exception e) { }
+    } catch(Exception e) { }
   }
 
   public void viewReply(String table) { //회원모두, 게시글 보기
     DBbase();
-    Appointment appointment = new Appointment();
     try {
       msg = "select * from " + table;
 
@@ -112,27 +110,28 @@ public class BoardHandler extends MemberHandler {
       for(int i = 0; i < 10 && RS.next() == true; i++) {
         int num = RS.getInt("num");
         String title = RS.getString("title");
-        String contents = RS.getString("contents");
-        //        String reply = RS.getString("reply");
+        //String reply = RS.getString("reply");
         int recommended = RS.getInt("recommended");
-        Date date  = RS.getDate("written");
+        Date written  = RS.getDate("written");
         String id = RS.getString("id");
         int viewCount = RS.getInt("viewcount");
         //System.out.printf(id + "\t" + grade +  "\t" + name+ "\t" + email+ "\t" + mobile+ "\t" + date+ "\t" + recommended+ "\t" + belongs);
         System.out.printf("%10d %10s %20d %15s %4s %3d%n"
-            , num, title, recommended, date, id, viewCount);
+            , num, title, recommended, written, id, viewCount);
       }
       //  게시글 번호로 내용 출력
       System.out.println("게시글 번호 입력: ");
-      String a = keyScan.nextLine();
-      String msg = "select contents,reply from " + table + " where num= '" + a + "'" ;
+      String number = keyScan.nextLine();
+      String msg = "select contents,reply from " + table + " where num= '" + number + "'" ;
       RS = ST.executeQuery(msg);
       while(RS.next() == true) {
+
         String contents = RS.getString("contents");
 
         System.out.println("------------------------------내용------------------------------");
         System.out.println();
         System.out.println(contents);
+
 
         //        System.out.println("------------------------------댓글------------------------------");
         //        System.out.println();
@@ -158,14 +157,26 @@ public class BoardHandler extends MemberHandler {
         //              break loop;
         //          }
         //        }
+
+        try { // 조회수 땡기는 while문
+          String text = "update " + table + " set viewcount = viewcount+1 where num =" + number ;
+          RS = ST.executeQuery(text);
+          while(RS.next() == true) {
+            int num = RS.getInt("num");
+            //  System.out.println(num);
+          }
+        }catch (Exception e) { } 
+        break;
+
       }
+
     } catch (Exception e) {
       System.out.println("에러이유" + e);
-    }    
-    System.out.println();
+    }
   }
 
-  public void viewBoard (String table) {
+
+  public void viewBoard(String table) {
     DBbase();
     try {
       msg = "select * from " + table;
@@ -174,21 +185,19 @@ public class BoardHandler extends MemberHandler {
       //      System.out.println(msg);
 
       // 자바의 정석 39p 참고
-      System.out.printf("%10s %10s %10s %20s %15s %4s %3s%n"
-          , "번호", "제목", "내용","좋아요","날짜","ID","조회수");
+      System.out.printf("%10s %10s %20s %15s %4s %3s%n"
+          , "번호", "제목", "좋아요","날짜","ID","조회수");
       System.out.println();
       for(int i = 0; i < 5 && RS.next() == true; i++) {
         int num = RS.getInt("num");
         String title = RS.getString("title");
-        String contents = RS.getString("contents");
-        //        String reply = RS.getString("reply");
         int recommended = RS.getInt("recommended");
-        Date date  = RS.getDate("written");
+        Date written  = RS.getDate("written");
         String id = RS.getString("id");
         int viewCount = RS.getInt("viewcount");
         //System.out.printf(id + "\t" + grade +  "\t" + name+ "\t" + email+ "\t" + mobile+ "\t" + date+ "\t" + recommended+ "\t" + belongs);
-        System.out.printf("%10d %10s %10s %20d %15s %4s %3d%n"
-            , num, title, contents, recommended, date, id, viewCount);
+        System.out.printf("%10d %10s %20d %15s %4s %3d%n"
+            , num, title, recommended, written, id, viewCount);
       }
     }catch(Exception e) { }
   } 
@@ -210,8 +219,8 @@ public class BoardHandler extends MemberHandler {
         PST.setString(1, changeGrade);
         PST.setString(2, changeId);
 
-        int change = PST.executeUpdate();
-        if (change > 0) {
+        int condition = PST.executeUpdate();
+        if (condition > 0) {
           System.out.println("권한 부여 완료");
         } else {
           System.out.println("권한 부여 실패");

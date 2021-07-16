@@ -30,7 +30,6 @@ public class App extends MemberHandler{
           System.out.println("게시판을 종료합니다.");
           System.exit(0);
         case 99: adminMode.admin(); break;
-        default : System.out.println("잘못 입력하셨습니다.");
 
       }//switch end
     }

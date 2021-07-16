@@ -9,8 +9,7 @@ public class Board extends MemberHandler{
 
     Appointment appointment = new Appointment();
     BoardHandler boardHandler = new BoardHandler();
-    DB db = new DB();
-    db.DBbase();
+    DBbase();
     System.out.println("\"-----------------------------------[자유 게시판]---------------------------------------");
     boardHandler.viewBoard("freeboard");
     System.out.println("-----------------------------------------------------------------------------------------");
@@ -80,8 +79,8 @@ public class Board extends MemberHandler{
     boardHandler.viewBoard(input);
     try {
       loop: while (true) {
-        String grd = "select grade from id where id = '" + id + "'";//입력값 id가 포함된 쿼리문을 변수grd에 입력
-        RS = ST.executeQuery(grd);
+        String text = "select grade from id where id = '" + id + "'";//입력값 id가 포함된 쿼리문을 변수grd에 입력
+        RS = ST.executeQuery(text);
 
         //변수 grd를 데이터베이스 변수 RS에 입력한다.
         while(RS.next() == true) {

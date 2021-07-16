@@ -58,8 +58,8 @@ public class Appointment extends MemberHandler{ // 스터디 약속
       PST.setString(3, time);
       PST.setInt(4, numLimit);
 
-      int OK = PST.executeUpdate();
-      if (OK > 0) {
+      int condition = PST.executeUpdate();
+      if (condition > 0) {
         System.out.println(title + " 게시글이 등록되었습니다.");
       } else {
         System.out.println(title + " 게시글 등록이 실패했습니다.");
@@ -94,8 +94,8 @@ public class Appointment extends MemberHandler{ // 스터디 약속
         PST.setInt(1, num);
         PST.setString(2, title);
 
-        int aa = PST.executeUpdate();
-        if (aa > 0) {
+        int condition = PST.executeUpdate();
+        if (condition > 0) {
           System.out.println(num + "번 게시글 '" + title +"' 삭제 성공했습니다.");
         } else {
           System.out.println(num + "번 게시글 '" + title +"' 삭제 실패했습니다.");
@@ -130,8 +130,8 @@ public class Appointment extends MemberHandler{ // 스터디 약속
       PST.setInt(3, numlimit);
       PST.setString(4, updatetitle);
 
-      int OK = PST.executeUpdate();
-      if (OK>0) {
+      int condition = PST.executeUpdate();
+      if (condition > 0) {
         System.out.println( "게시글 수정 성공");
       }else {
         System.out.println( "게시글 수정 실패");
