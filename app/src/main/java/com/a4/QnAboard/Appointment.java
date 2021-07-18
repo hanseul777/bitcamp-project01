@@ -85,9 +85,10 @@ public class Appointment extends MemberHandler{ // 스터디 약속
       int num = Integer.parseInt(keyScan.nextLine());
       System.out.print("삭제할 게시글 제목 입력 : ");
       String title = keyScan.nextLine();
+      System.out.println("정말 삭제하시겠습니까? [y / N]");
 
       if(!keyScan.nextLine().equals("y")) {
-        System.out.println("회원 탈퇴 취소하셨습니다.");
+        System.out.println("게시글 삭제 취소하셨습니다.");
       } else {
         msg = "delete from appointment where num = ? and title = ?" ;
         PST = CN.prepareStatement(msg);
