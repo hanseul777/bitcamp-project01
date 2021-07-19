@@ -127,8 +127,6 @@ public class MemberHandler extends DB {
       PST.setString(5, mobile);
       PST.setString(6, belongs);
 
-      System.out.println(msg);
-
       int condition  = PST.executeUpdate();
       if (condition  > 0) {
         System.out.println(id + "회원가입 성공했습니다.");

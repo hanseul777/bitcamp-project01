@@ -29,8 +29,6 @@ public class BoardHandler extends MemberHandler {
       PST.setString(2, contents);
       // PST.setString(5, id);
 
-      System.out.println(msg);
-
       int OK = PST.executeUpdate();
       if (OK > 0) {
         System.out.println(title + "게시글이 등록되었습니다.");
@@ -50,9 +48,7 @@ public class BoardHandler extends MemberHandler {
       System.out.print("내용 수정내역 입력  :");
       String contents = keyScan.nextLine();
 
-      msg = "update " + table + " set title='" + updatetitle +"', contents='"+ contents +"'  where  = '"+ title + "'";
-
-      System.out.println(msg);
+      msg = "update " + table + " set title = '" + updatetitle +"', contents='"+ contents +"'  where title = '"+ title + "'";
 
       int condition = ST.executeUpdate(msg);
       if (condition > 0) {
@@ -74,7 +70,6 @@ public class BoardHandler extends MemberHandler {
         System.out.println("게시르 삭제 취소하였습니다.");
       } else {
         msg = "delete from " + table + " where num = " + a ;
-        System.out.println(msg);
         int condition = ST.executeUpdate(msg);
 
         if (condition > 0) {
