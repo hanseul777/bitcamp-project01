@@ -15,8 +15,8 @@ public class Appointment extends MemberHandler{ // 스터디 약속
       //      System.out.println(msg);
 
       // 자바의 정석 39p 참고
-      System.out.printf("%5s %10s %10s %10s %10s %10s %4s %4s%n"
-          , "번호", "제목", "장소", "시간","날짜", "ID","정원", "조회수");
+      System.out.printf("%5s %10s %10s %10s %10s %10s %4s%n"
+          , "번호", "제목", "장소", "시간","날짜", "ID","정원");
       System.out.println();
       while(RS.next() == true) {
         int num = RS.getInt("num");
@@ -26,10 +26,10 @@ public class Appointment extends MemberHandler{ // 스터디 약속
         Date date  = RS.getDate("written");
         String id = RS.getString("id");
         int numLimit = RS.getInt("numlimit");
-        int viewCount = RS.getInt("viewcount");
+        int assign = RS.getInt("assign");
         //System.out.printf(id + "\t" + grade +  "\t" + name+ "\t" + email+ "\t" + mobile+ "\t" + date+ "\t" + recommended+ "\t" + belongs);
-        System.out.printf("%5s %10s %10s %10s %10s %10s %4s %4s%n"
-            , num, title, location, time, date, id, numLimit, viewCount);
+        System.out.printf("%5s %10s %10s %10s %10s %10s %4d/%s\n"
+            , num, title, location, time, date, id,assign ,numLimit);
       }
     } catch(Exception ex) {
       System.out.println("잘못 입력입니다.");
@@ -50,8 +50,8 @@ public class Appointment extends MemberHandler{ // 스터디 약속
       String time = keyScan.nextLine();
       System.out.print("정원 : ");
       int numLimit = Integer.parseInt(keyScan.nextLine());
-      msg = "insert into appointment(num, title, location, time, written, id, numlimit, viewcount) "
-          + "values(seq.nextval, ?, ?, ?, sysdate, '" + id  + "',? ,0)";
+      msg = "insert into appointment(num, title, location, time, written, id, numlimit, assign) "
+          + "values(appointmentseq.nextval, ?, ?, ?, sysdate, '" + id  + "',? ,0)";
       PST = CN.prepareStatement(msg);
       PST.setString(1, title);
       PST.setString(2, location);
@@ -86,8 +86,9 @@ public class Appointment extends MemberHandler{ // 스터디 약속
       System.out.print("삭제할 게시글 제목 입력 : ");
       String title = keyScan.nextLine();
 
+      System.out.print("게시글을 정말 굳이 꼭 삭제하셔야겠습니까? (y/N)");
       if(!keyScan.nextLine().equals("y")) {
-        System.out.println("회원 탈퇴 취소하셨습니다.");
+        System.out.println("게시글 삭제 취소하셨습니다.");
       } else {
         msg = "delete from appointment where num = ? and title = ?" ;
         PST = CN.prepareStatement(msg);
@@ -141,62 +142,186 @@ public class Appointment extends MemberHandler{ // 스터디 약속
   }
 
   public void joinStudy() {
-
-
+    DBbase();
     try {
       System.out.print("참여할 스터디 게시판의 번호를 선택하세요 : ");
-      String number = keyScan.nextLine();
-      String msg = "select title,location,time,numLimit from appointment where num= '" + number + "'" ;
+      int number = keyScan.nextInt();
+      msg = "select * from appointment where num = ?" ;
+      PST = CN.prepareStatement(msg);
+      PST.setInt(1, number);
 
-      RS = ST.executeQuery(msg);
+      RS = PST.executeQuery();
       while(RS.next() == true) {
-
+        String title = RS.getString("title");
         String location = RS.getString("location");
         String time = RS.getString("time");
         int numLimit = RS.getInt("numLimit");
-
-        int request = keyScan.nextInt();
-        final int architecture = request | 0x01; // 0000 0001
-        final int documentize = request | 0x02; // 0000 0010
-        final int coder1 = request | 0x04; // 0000 0100
-        final int coder2 = request | 0x08; // 0000 1000
+        int assign = RS.getInt("assign");
 
         System.out.println("-----------------------------스터디 게시판----------------------------");
         System.out.println();
-        System.out.printf("'%s'에서 '%s'까지 '%d'명 모집\n", location, time, numLimit);
-        // 월요일 할일 : appointment assign 컬럼추가
-
-        if (architecture != 0) {
-          System.out.printf("%30s ■","프로젝트매니저");
-        } else if (architecture == 0) {
-          System.out.printf("%30s □","프로젝트매니저");
-        } if (documentize != 0) {
-          System.out.printf("%30s ■","문서화책임자");
-        } else if (documentize == 0) {
-          System.out.printf("%30s □","문서화책임자");
-        } if (coder1 != 0) {
-          System.out.printf("%30s ■","무지성개발자");
-        } else if (coder1 == 0) {
-          System.out.printf("%30s □","무지성개발자");
-        } if (coder2 != 0) {
-          System.out.printf("%30s ■","지성개발자");
-        } else if (coder2 == 0) {
-          System.out.printf("%30s □","지성개발자");
-        }
-
-        //■ □
-        // sql 문으로 assign 비교 적용
-        int compare = architecture | documentize | coder1 | coder2;
-        int assign = 0;
-        if(compare != 0) {
-          System.out.println("해당 포지션은 마감되었습니다.");
-        } else {
-
-          System.out.println("참가완료되었습니다.");
-        }
+        System.out.printf("프로젝트명 : %s \n", title);
+        System.out.printf("장소 : %s \n", location);
+        System.out.printf("시간 : %s \n", time);
+        System.out.printf("모집현황 : 총원 %d 중 %d명 모집 중 \n", numLimit, assign);
         System.out.println();
+        //        
+        //        if (architecture != 0) {
+        //          System.out.printf("%s ■","프로젝트매니저");
+        //        } else if (architecture == 0) {
+        //          System.out.printf("%s □","프로젝트매니저");
+        //        } if (documentize != 0) {
+        //          System.out.printf("%15s ■","문서화책임자");
+        //        } else if (documentize == 0) {
+        //          System.out.printf("%15s □","문서화책임자");
+        //        } if (coder1 != 0) {
+        //          System.out.printf("%15s ■","무지성개발자");
+        //        } else if (coder1 == 0) {
+        //          System.out.printf("%15s □","무지성개발자");
+        //        } if (coder2 != 0) {
+        //          System.out.printf("%15s ■","지성개발자\n");
+        //        } else if (coder2 == 0) {
+        //          System.out.printf("%15s □","지성개발자\n");
+        //        }
+
+        int architecture = 0x01;
+        int documentize = 0x02;
+        int coder1 = 0x04;
+        int coder2 =  0x08;
+        int compare = 0;
+
+
+        System.out.println("지원 직군을 선택해주세요.");
+        System.out.println();
+        System.out.println("[1] 프로젝트 매니저 [2] 문서작업관리자 [3] 무지성코더 [4] 지성코더");
+        System.out.print("입력 >>>> ");
+        int request = keyScan.nextInt();
+
+        String text = "select compare from appointment where num = " + number;
+        RS = ST.executeQuery(text);
+        while(RS.next() == true) {
+          compare = RS.getInt("compare");
+        }
+
+        loop: while (compare < 15) {
+          switch(request) {
+            case 1:  
+              if ((compare & 0x01) == 0) {
+                //                System.out.printf("%s ■","프로젝트매니저");
+                System.out.println(" 참여 완료!");
+                assign++;
+                compare =+ architecture;
+
+                String msg = "update appointment set compare = ? where num = ?";
+                PST = CN.prepareStatement(msg);
+                PST.setInt(1, compare);
+                PST.setInt(2, number);
+
+                break loop;
+              } else {
+                System.out.println("해당 포지션은 마감되었습니다.");
+                break loop;
+              }
+
+            case 2:   break;
+            case 3:  break;
+            case 4:  break;
+          }
+        }
+
+
+
+
+        // 월요일 할일 : appointment assign 컬럼추가
+        switch (request) {
+
+          case 1:
+            if (architecture != 0) {
+              if (architecture == 0x01) {
+                System.out.println("해당 포지션은 마감되었습니다.");
+              } else {
+
+                request = compare;
+
+              }
+            } else if (architecture == 0) {
+              System.out.printf("%15s □","프로젝트매니저");
+            }
+            break;
+
+          case 2:
+            if (documentize != 0) {
+              if (documentize == 0x02) {
+                System.out.printf("해당 포지션은 마감되었습니다.");
+              } else {
+                System.out.printf("%15s ■","문서화책임자");
+                System.out.println(" 참여 완료!");
+                request = compare;
+                assign++;
+              }
+            } else if (documentize == 0) {
+              System.out.printf("%15s □","문서화책임자");
+            }
+            break;
+
+          case 3:
+            if (coder1 != 0) {
+              if (coder1 == 0x04) {
+                System.out.printf("해당 포지션은 마감되었습니다.");
+              } else {
+                System.out.printf("%15s ■","무지성개발자");
+                System.out.println(" 참여완료");
+                request = compare;
+                assign++;
+              }
+            } else if (coder1 == 0) {
+              System.out.printf("%15s □","무지성개발자");
+            }
+            break;
+
+          case 4:
+            if (coder2 != 0) {
+              if (coder2 != 0) {
+                System.out.printf("해당 포지션은 마감되었습니다.");
+              } else {
+                System.out.printf("%15s ■\n","지성개발자");
+                System.out.println(" 참여 완료!");
+                request = compare;
+                assign++;
+              }
+            } else if (coder2 == 0) {
+              System.out.printf("%15s □\n","지성개발자");
+            }
+            break;
+          default :
+            System.out.println("잘못된 입력입니다.");
+        }
+
+        String updateMsg = "update appointment set assign = ? where num = ?";
+        PST = CN.prepareStatement(updateMsg);
+        PST.setInt(1, assign);
+        PST.setInt(2, number);
+
+        int condition = PST.executeUpdate();
+
+        // sql 문으로 assign 비교 적용
+        //        int compare = architecture | documentize | coder1 | coder2;
+        //
+        //        String compareMsg = "update appoinment set role"+ request +" = ? where num = ?";
+        //        PST = CN.prepareStatement(compareMsg);
+        //        PST.setInt(1, compare);
+        //        PST.setString(2, compareMsg);
+        //
+        //        int role1 = 0;
+        //        if(role1 != 0) {
+        //          System.out.println("해당 포지션은 마감되었습니다.");
+        //          break;
+        //        } else {
+        //          System.out.println("참가완료되었습니다.");
+        //          break;
+        //        }
       }
-    } catch(Exception e) { }
+    } catch(Exception e) {System.out.println(e);}
 
 
     /*
@@ -237,4 +362,3 @@ public class Appointment extends MemberHandler{ // 스터디 약속
   //    }catch (Exception e) {}
   //  }
 }
-

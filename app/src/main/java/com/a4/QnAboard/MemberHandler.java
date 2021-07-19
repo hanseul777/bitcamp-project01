@@ -84,6 +84,8 @@ public class MemberHandler extends DB {
             }
           } else { // id, pw 일치하지 않는 경우
             System.out.println("비밀번호가 맞지 않습니다.");
+            id = null;
+            password = null;
           }
         }
         System.out.println();

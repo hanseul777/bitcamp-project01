@@ -69,14 +69,18 @@ public class BoardHandler extends MemberHandler {
       System.out.println("\n삭제할 게시글 번호 입력 : ");
       int a = Integer.parseInt(keyScan.nextLine());
 
-      msg = "delete from " + table + " where num = " + a ;
-      System.out.println(msg);
-      int condition = ST.executeUpdate(msg);
+      System.out.print("정말로 삭제하시겠습니까? ");
+      if(!keyScan.nextLine().equals('y')) {
+        System.out.println("게시르 삭제 취소하였습니다.");
+      } else {
+        msg = "delete from " + table + " where num = " + a ;
+        System.out.println(msg);
+        int condition = ST.executeUpdate(msg);
 
-      if (condition > 0) {
-        System.out.println(a + "게시글 삭제");
-      } else {System.out.println(a + "게시글 삭제실패했습니다.");}
-
+        if (condition > 0) {
+          System.out.println(a + "게시글 삭제");
+        } else {System.out.println(a + "게시글 삭제실패했습니다.");}
+      }
     }catch (Exception e) {System.out.println("에러이유" + e);}
   }
 
@@ -89,6 +93,8 @@ public class BoardHandler extends MemberHandler {
       RS = ST.executeQuery(msg);
       while(RS.next() == true) {
         String contents = RS.getString("contents");
+
+        // int joined = RS.getInt("role1");
         String title = RS.getString("title");
         System.out.println(title +"\t" + contents);
       }
