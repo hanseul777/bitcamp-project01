@@ -132,7 +132,9 @@ public class MemberHandler extends DB {
       int condition  = PST.executeUpdate();
       if (condition  > 0) {
         System.out.println(id + "회원가입 성공했습니다.");
-      } else {System.out.println(id + "회원가입 실패했습니다.");}
+      } else {
+        System.out.println(id + "회원가입 실패했습니다.");
+      }
     }catch (Exception e) { } 
     System.out.println();
   }
