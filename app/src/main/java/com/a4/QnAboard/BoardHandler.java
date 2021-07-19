@@ -29,7 +29,7 @@ public class BoardHandler extends MemberHandler {
       PST.setString(2, contents);
       // PST.setString(5, id);
 
-      System.out.println(msg);
+//      System.out.println(msg)
 
       int OK = PST.executeUpdate();
       if (OK > 0) {
