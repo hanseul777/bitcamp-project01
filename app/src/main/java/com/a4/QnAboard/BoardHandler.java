@@ -28,7 +28,6 @@ public class BoardHandler extends MemberHandler {
       PST.setString(1, title);
       PST.setString(2, contents);
       // PST.setString(5, id);
-
       int OK = PST.executeUpdate();
       if (OK > 0) {
         System.out.println(title + "게시글이 등록되었습니다.");

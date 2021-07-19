@@ -13,7 +13,7 @@ public class Board extends MemberHandler{
     System.out.println("\"-----------------------------------[자유 게시판]---------------------------------------");
     boardHandler.viewBoard("freeboard");
     System.out.println("-----------------------------------------------------------------------------------------");
-    System.out.println("-----------------------------------[질문답변 게시판]-------------------------------------");
+    System.out.println("-----------------------------------[사용기 게시판]-------------------------------------");
     boardHandler.viewBoard("board");
     System.out.println("-----------------------------------------------------------------------------------------");
     System.out.println("-----------------------------------[수업진도 게시판]-------------------------------------");
@@ -24,7 +24,7 @@ public class Board extends MemberHandler{
     System.out.println("-----------------------------------------------------------------------------------------");
     System.out.println();
     System.out.println("[게시판 목록] : freeBoard/ board/ review/ appointment");
-    System.out.println("[단축어] : [f]-자유 게시판 [b]-질문답변 게시판 "
+    System.out.println("[단축어] : [f]-자유 게시판 [b]-사용기 게시판 "
         + "[r]-수업진도 게시판 [a]-스터디모집 게시판 [c]-취소");
     System.out.println();
     System.out.print("입장할 게시판을 입력해주세요 : ");
