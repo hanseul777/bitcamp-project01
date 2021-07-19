@@ -85,6 +85,7 @@ public class Appointment extends MemberHandler{ // 스터디 약속
       int num = Integer.parseInt(keyScan.nextLine());
       System.out.print("삭제할 게시글 제목 입력 : ");
       String title = keyScan.nextLine();
+      System.out.println("정말 삭제하시겠습니까? [y / N]");
 
       System.out.print("게시글을 정말 굳이 꼭 삭제하셔야겠습니까? (y/N)");
       if(!keyScan.nextLine().equals("y")) {
