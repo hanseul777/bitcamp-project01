@@ -104,7 +104,7 @@ public class BoardHandler extends MemberHandler {
       //      System.out.println(msg);
 
       // 자바의 정석 39p 참고
-      System.out.printf("%10s %10s %20s %15s %4s %3s%n"
+      System.out.printf("%5s %10s %20s %15s %4s %3s%n"
           , "번호", "제목","좋아요","날짜","ID","조회수");
       System.out.println();
       for(int i = 0; i < 10 && RS.next() == true; i++) {
@@ -116,7 +116,7 @@ public class BoardHandler extends MemberHandler {
         String id = RS.getString("id");
         int viewCount = RS.getInt("viewcount");
         //System.out.printf(id + "\t" + grade +  "\t" + name+ "\t" + email+ "\t" + mobile+ "\t" + date+ "\t" + recommended+ "\t" + belongs);
-        System.out.printf("%10d %10s %20d %15s %4s %3d%n"
+        System.out.printf("%5d %10s %20d %15s %4s %3d%n"
             , num, title, recommended, written, id, viewCount);
       }
       //  게시글 번호로 내용 출력
@@ -185,7 +185,7 @@ public class BoardHandler extends MemberHandler {
       //      System.out.println(msg);
 
       // 자바의 정석 39p 참고
-      System.out.printf("%10s %10s %20s %15s %4s %3s%n"
+      System.out.printf("%5s %10s %20s %15s %4s %3s%n"
           , "번호", "제목", "좋아요","날짜","ID","조회수");
       System.out.println();
       for(int i = 0; i < 5 && RS.next() == true; i++) {
@@ -196,7 +196,7 @@ public class BoardHandler extends MemberHandler {
         String id = RS.getString("id");
         int viewCount = RS.getInt("viewcount");
         //System.out.printf(id + "\t" + grade +  "\t" + name+ "\t" + email+ "\t" + mobile+ "\t" + date+ "\t" + recommended+ "\t" + belongs);
-        System.out.printf("%10d %10s %20d %15s %4s %3d%n"
+        System.out.printf("%5d %10s %20d %15s %4s %3d%n"
             , num, title, recommended, written, id, viewCount);
       }
     }catch(Exception e) { }
